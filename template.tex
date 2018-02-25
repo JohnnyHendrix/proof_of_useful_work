@@ -1,0 +1,150 @@
+\documentclass[ngerman]{semdoc}
+% Template: $Id: t01_txt.tex,v 1.7 2000/05/23 12:13:37 bless Exp $
+% -----------------------------------------------------------------------------
+% Seminarbeitrag
+% -----------------------------------------------------------------------------
+% Kommentare beginnen mit einem %-Zeichen
+\docbegin
+% --> Oberhalb der Linie bitte nichts �ndern.
+% ---------------------------------------------------------------------------
+% \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+% Stellen, an denen etwas geaendert werden soll, sind wie hier gekennzeichnet.
+% /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\
+
+%
+% ---------------------------------------------------------------------------
+% \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+% --> Bitte den Titel des Beitrages in die n�chste Zeile eintragen:
+\title{Proof of Useful Work: Eine Umsetzung des Proof of Work Protokolls mit Fokus auf Usefulness}
+%
+% --> ... und den Namen des Autors:
+\author{Jean-Marc Hendrikse}
+% --> optional eine URL mailto:... oder http://www...
+\authorURL{mailto:jean-marc.hendrikse@student.kit.edu}
+% /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\
+% -----------------------------------------------------------------------------
+%
+%
+\maketitle
+%
+% -----------------------------------------------------------------------------
+% ACHTUNG - ACHTUNG - ACHTUNG - ACHTUNG - ACHTUNG - ACHTUNG - ACHTUNG - ACHTUNG
+% -----------------------------------------------------------------------------
+% --> Im Text sollte \section der "h�chste" Gliederungsbefehl sein,
+%     also bitte kein \chapter oder gar \part verwenden.
+%     Der Text kann aber mit \section{}, \subsection{}, \subsubsection{}
+%     untergliedert werden.
+%
+%     Bitte nicht die Befehle \input oder \include verwenden, also den
+%     Text _nicht_ in mehrere Dateien aufteilen!
+%
+%     \newpage oder manuelle Zeilenumbr�che (\\) sollten ebenfalls nicht
+%     verwendet werden.
+%
+%     Bitte darauf achten, dass im _Quelltext_ ein Abschnitt nicht nur
+%     in einer Zeile steht (das macht z.B. Word beim Exportieren ohne
+%     Zeilenumbruch), der Abschnitt sollte auch bei 80 Zeichen pro Zeile
+%     noch lesbar sein, d.h. Zeilenumbr�che im Quelltext bitte entsprechend
+%     einf�gen.
+%
+%     Referenzen auf andere Abschnitte sind bitte mit \ref{...}, wie
+%     anschliessend gezeigt, anzugeben und nicht etwa als Text wie
+%     "siehe auch Abschnitt 2.2"
+%
+%     Anf�hrungszeichen sind nicht einfach so "Text" einzugeben, sondern so:
+%     "`Text"', andernfalls gibt es Fehler.
+%
+%     Das Zeichen ~ erzeugt einen Leerraum an dem aber nicht getrennt wird.
+%     Weitere Trennstellen:
+%     "- = zus�tzliche Trennstelle
+%     "| = Vermeidung von Ligaturen und m�gliche Trennung (bsp: Schaf"|fell)
+%     "~ = Bindestrich an dem keine Trennung erlaubt ist (bsp: bergauf und "~ab)
+%     "= = Bindestrich bei dem Worte vor und dahinter getrennt werden d�rfen
+%     "" = Trennstelle ohne Erzeugung eines Trennstrichs (bsp: und/""oder)
+%
+%     Weiterer Hinweis:
+%     KEIN Glossar erstellen! Abk�rzungen sind im Text zu erkl�ren!
+%     Der Text ist mit z.B. mit ispell auf Schreibfehler zu pr�fen
+%     (am besten aus dem Emacs heraus,
+%     Men�: Edit -> Spell -> Select Deutsch8, dann Edit -> Spell -> Check Buffer)
+%
+% ---------------------------------------------------------------------------
+% \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+% ----------------------------Introduction-----------------------------------
+\section{Einführung} % in die Klammern die Ueberschrift
+\label{tmp_Introduction} % und ein Label
+
+% ---------------------------------------------------------------------------
+% \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+% ----------------------------Basics-----------------------------------
+\section{Grundlagen}
+\label{tmp_basics}
+
+\subsection{Definition von Nutzen}
+\label{tmp_usefulness}
+
+Unterscheidung in gesellschaftlichen und privaten Nutzen. Unter Nutzen (Usefulness) verstehe ich im folgenden den Benefit, den man aus dem Gebrauch einer Sache ziehen kann[https://de.wiktionary.org/wiki/Nutzen]. Dadruch, dass es sich bei der Blockchain um ein verteiltest System in einer Community handelt, betrachte ich in meiner Arbeit die Sichtweise des gesellschaftlichen Nutzens. Mehrere Akteure handeln auf der Blockchain. Wieder unterscheide zwischen Sozialem oder wirtschaftlichen Nutzen. Die Betrachtung des gesellschaftlichen Nutzens führt sehr schnell zu einer Philosophischen Frage, auf die ich hier nicht genauer eingehende werde, sondern nur eine Definition ablegen, wie Nutzen im Rahmen meiner Arbeit gewählt wird.
+
+
+
+\subsection{Blockchain und Bitcoin}
+\label{tmp_bc}
+Grob gesprochen handelt es sich bei der Blockchain um ein dezentrales öffentliches Hauptbuch (engl. public ledger). Um bislang Transaktionen durchführen zu können, vertrauten „vertrauenswürdigen“ Instanzen, beispielsweise Banken, denen wir unser Geld oder Daten zur Verwaltung übergaben. Diese dritten Instanzen besitzen einen permanenten Zugriff auf private Besitztümer und können jeder Zeit auf diese zugreifen. Mithilfe der Blockchain Technologie wird eine neue Möglichkeit offenbart, vom zentralen Gedanken der Systeme auf ein dezentrales System umzusteigen. Im wesentlichen handelt es sich bei der Blockchain um eine dezentrale Datenbank in einem Peer-to-Peer Netzwerk von Computersystemen. Was der Inhalt der Daten auf dieser Datenbank ist spielt dabei keine Rolle. Es kann sich um Transaktionsdaten einer Überweisung, digitale Ereignisse oder um Grundbucheinträge handeln. Anders als es bei herkömmlichen Datenbanken jedoch der Fall ist, wird die Blockchain nicht auf einem einzelnen zentralen Server, sondern verteilt auf mehreren Rechnern eines großen Netzwerks, den Netzwerkknoten, gehalten. Jeder Teilnehmer dieses Netzwerks erhält bei Eintritt in die Blockchain eine lokale Kopie von allen Einträgen.
+Der Entwurf der Blockchain sieht wie folgt aus: Jede Transaktion wird zu einem Block zusammengefasst und mittels kryptographischer Berechnungen mit anderen Transaktionsblöcken zu einer Kette, der „Block-Chain“, verbunden. Ein einzelner Block besteht sowohl aus einem Zeitstempel, Transaktionsdaten sowie aus einem kryptographischen Hash des vorhergehenden gültigen Blocks. Bei der Neuaufnahme eines neuen Blockes in die Blockchain muss per Konsens die Mehrheit aller Teilnehmer des Systems verifizieren, dass dieser Block gültig ist, also dass diese Transaktion tatsächlich stattgefunden hat. Nur und nur dann kann dieser Block aufgenommen werden. Dadurch dass jeder Teilnehmer eine Kopie der aktuellen Blockchain-Historie enthält, kann er diese mit der neuen abgleichen und verifizieren. So kann eine mehrheitliche Einigung zwischen den Knoten geschaffen werden. In der Blockchain wird immer die gesamte Historie an Transaktionen, die jemals durchgeführt wurden, chronologisch linear erweitert.
+Die kryptographische Verkettung von Transaktionen bildet das Fundament vieler Kryptowährungen. Das wohl bekannteste Beispiel ist die digitale Währung Bitcoin, die im November 2008 mit dem Titel „Bitcoin: A Peer-to-Peer Electronic Cash System”1 von einer unbekannten Einzelperson oder Gruppe mit dem Pseudonym Satoshi Nakamoto entwickelt wurde. Viele bis dahin vorangehende Digitale Währungen scheiterten daran, dass sie durch eine zentrale Instanz verifiziert werden mussten, um das Double Spending Problem zu lösen. Mithilfe der Blockchain-Technologie konnte Nakamoto einen Ansatz beschreiben, der eben dieses Problem löste.
+
+
+\subsection{Konsensmechanismus}
+\label{tmp_consens}
+In zentralisierten Organisationen werden Entscheidungen meistens getroffen, indem eine Instanz die Entscheidung trifft. Da in der Blockchain keine zentrale Entschiedungsinstanz existiert bzw. auf diese bewusst verzichtet werden soll, müssen Entscheidungen anders getroffen werden. Im Fall von Bitcoin wird ein mehrheitlicher Konsens getroffen, indem ein Konsensmechanismus eingeführt wird. Ein Konsensmechanismus bezeichnet einen Algorithmus, der eine Einigung über den Status des Netzwerks zwischen den beteiligten (meistens anonymen) Netzwerkknoten schafft. Dies ist die Basis der Blockchain Technologie. Dabei wird sichergestellt, dass alle Teilnehmer eine identische Kopie der Blockchain besitzen. Wie bereits im vorangegangenen Kapitel erwähnt erschwert ein Konsensmechanismus die Manipulation von Daten erheblich. Der Hauptgedanke der dahinter steckt ist, dass durch einen dezentralen Konsens-Mechanismus ein zentrale Kontrollinstanz zur Integritätsbestätigung obsolet wird.
+
+\subsection{Difficulty}
+\label{tmp_difficulty}
+
+\subsection{The Byzantine Fault Tolerance}
+\label{tmp_byzantine}
+
+\subsection{Proof of Work}
+\label{tmp_pow}
+
+\subsection{Primecoin}
+\label{tmp_primecoin}
+
+Der größte Kritikpunkt der immer wieder im Zusammenhang mit Bitcoin und dessen Proof of Work Protokoll unter Experten auftaucht ist, dass die Berechnung zum Minen von Blöcken, also das Lösen einer Challenge, keinen nachhaltigen Wert besitzt <<<<BELEGE>>>>>. Wie schon bereits erwähnt hat das Minen keinen anderen Sinn als zu beweisen, dass Energieaufgewendet wurde und man sich so dafür qualifiziert Blöcke zur Blockchain hinzuzufügen. Trotzdem ist das Proof of Work Protokoll das Herzstück von Bitcoins Sicherheit. Denn würde es Proof of Work nicht geben, so könnte ein kompromitierter Angreifer sich als Millionen von Bitcoin Knoten zur selben Zeit ausgeben und somit ernsthaft Bitcoins Transaktionsblöcke angreifen oder austauschen. Allerdings werden lediglich SHA256 berechnet, wodurch eine große Menge an Energie verschwendet wird.
+Primecoin ist die erste Kryptowährung, die auf dem Proof of Work Ansatz basiert und eine effiziente Lösungen für Aufgaben generiert, die weiter verwendet werden können und somit einen Nutzen liefern [Primecoin paper]. Statt also einer nutzlosen Berechnung eines SHA256 Hashes1 müssen Miner beim Proof of Work Protokoll von Primecoin lange Primzahlenketten finden. Es gibt drei Arten von Primzahlenketten, die sich für das Proof of Work Protokoll eignen: Cunningham Chain (CC) 1. Art, CC 2. Art und Bi-twin chain.
+
+Cunningham Chain 1. Art. Bei der Cunninghamchain muss jede Primzahl der Kette um ein größer als das doppelte der vorhergehenden Primzahl sein:
+
+
+
+Beispiel Kette der Länge 5: 1531, 3061, 6121, 12241, 24481
+
+Cunningham Chain 2. Art. Die Cunningham Chain 2. Art gibt vor, dass jede Primzahl um eins verringert als das doppelte des Vorgängers ist.
+
+
+Beispiel-Kette der Länge 5: 2, 5, 11, 23, 47
+
+
+Bi-Twin Chain. In der Bi-Twin chain werden Paare gehalten, deren Differenz 2 ergibt.
+
+Beispiel-Kette: 211049, 211051, 422099, 422101, 844199, 844201
+
+Nun könnte man sich hier die Frage stellen wo der Nutzen in Berechnungen von Primzahlen liegt oder ob es lediglich eine ebenso sinnlose Berechnung wie die Berechnung von SHA256 Hashes ist. Doch es gibt viele Anwendungsgebiete aus der Mathematik, die sich mit der Suche nach großen Ketten von Primzahlen beschäftigt. Unter anderem die Suche nach Mersenne Primzahlen oder das Primzahlen Theorem2. Nachfolgend seine Liste der University of Tennesseee erwähnt, die Gründe für die Suche nach Primzahlen liefert: http://primes.utm.edu/notes/faq/why.html
+
+1 Dabei wird mit nutzlos im Sinne für Weiterverwendung gemeint
+2 Fußnote
+
+\subsection{Permacoin}
+\label{tmp_permacoin}
+
+Einen ganz anderen Ansatz zur nützlichen Alternative zu Bitcoin im Vergleich zu Primecoin liefert Microsoft in Zusammenarbeit mit der University of Maryland mit Permacoin, bei dem die Blockchain als verteilter Speicher von Archivdaten dienen soll. Miner sollen nicht mehr nur reine Rechenleistung aufwenden sondern vielmehr ungenutzten Speicherplatz zur Verfügung stellen, weshalb er vielmehr dem Protokoll Proof of Retrievabilty ähnelt.
+
+
+% \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
+% Sollte noch zus�tzliche Literatur verwendet worden sein, dann bitte die
+% folgende Zeile auskommentieren.
+\bibliography{my_bibliography}
+% /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\ /\
+%
+\docend
+%%% end of document
