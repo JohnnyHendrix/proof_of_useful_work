@@ -21,7 +21,7 @@
 % ---------------------------------------------------------------------------
 % \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
 % --> Bitte den Titel des Beitrages in die n�chste Zeile eintragen:
-\title{Proof of Useful Work: Eine Nützliche Variante von Proof of Work}
+\title{Proof of Useful Work: Ein Alternatives Schema zu Proof of Work mit dem Schwerpunkt auf Nutzen}
 %
 % --> ... und den Namen des Autors:
 \author{Jean-Marc Hendrikse}
@@ -75,7 +75,7 @@
 %     Men�: Edit -> Spell -> Select Deutsch8, dann Edit -> Spell -> Check Buffer)
 %
 \begin{abstract}
-  Der Proof of Work-Mechanismus ist ein sehr wichtiger Bestandteil für die Konsensbildung und die Sicherheit vieler Kryptowährungen. Das erste und bekannteste Beispiel, das diesen Mechanismus in der Blockchain umsetzt ist das dezentrale Peer-to-Peer Geldsystem Bitcoin. Bei Proof of Work werden intensive Berechnungen einzig und allein für den Nachweis durchgeführt, dass Abreit bzw. Rechenleistung aufgewendet wurde. Der Stromverbrauch hat somit keinen weiteren Nutzen für die  die Gesellschaft und wird deswegen häufig als  ``Proof of Waste'' bezeichnet. Um dem entgegenzuwirken gibt es Ansätze, ein Proof of Work zu entwickeln, das Berechnungen mit einem Mehrwert für die Menschheit durchführt, sogenannte Proofs of Useful Work.
+  Der Proof of Work Mechanismus ist ein sehr wichtiger Bestandteil für die Konsensbildung und die Sicherheit vieler Kryptowährungen. Das erste und bekannteste Beispiel, das diesen Mechanismus in der Blockchain umsetzt ist das dezentrale Peer-to-Peer Geldsystem Bitcoin \cite{t01_bitcoin}. Bei Proof of Work werden intensive Berechnungen einzig und allein für den Nachweis durchgeführt, dass Arbeit bzw. Rechenleistung aufgewendet wurde. Der Stromverbrauch hat somit keinen weiteren Nutzen für die Gesellschaft und wird deswegen unter anderem auch als  ``Proof of Waste''\footnote{\url{https://hackernoon.com/proof-of-work-or-proof-of-waste-9c1710b7f025}} bezeichnet. Um der Verschwendung von Energieressourcen entgegenzuwirken gibt es Ansätze, sogenannte Proofs of Useful Work, die im Proof of Work Protokoll nutzlose Berechnung durch nützliche ersetzen, um so der Gesellschaft einen Mehrwert zu bieten. In dieser Ausarbeitung soll ein solches Proof of Useful Work beschrieben werden, das auf der Basis NP-harter Probleme beruht und eine Alternative zu Bitcoin's Proof of Work bieten soll.
 \end{abstract}
 
 % ---------------------------------------------------------------------------
@@ -84,17 +84,17 @@
 \section{Einführung} % in die Klammern die Ueberschrift
 \label{tmp_Introduction} % und ein Label
 
-Bitcoin \cite{t01_bitcoin} gilt als die erste erfolgreiche digitale Geldwährung und dessen Aufmerksamkeit steigt stetig an. Seinen riesen Erfolg verdankt die Währung der zugrundeliegenden Technologie, Blockchain. Durch die wachsende Aufmerksamkeit, die vorallem durch positive Meldungen aus den Medien vorangetrieben wird \footnote{ , dass ein Bitcoin die 20 Tausend Dollar marke erreicht hat und viele reich geworden sind Datum und bedeutung}, wachsen die Teilnehmer der Blockchain immens an. Anders als es jedoch bei zentralen Banken in der heutigen Gesellschaft der Fall ist, liegen die Coins von Bitcoin nirgendwo zentral in physischer Form in einem Institut, sondern werden von Computersystemen erzeugt \cite{t01_dshane} . Im Bitcoin-Jargon spricht man auch von ``Mining''. Es ist sogar für jede Person mit entsprechender Hardware möglich selbst ``Mining'' zu betreiben, indem Rechenleistung investiert wird. Das auf der Blockchain basierende elektronische Geldsystem hat hierfür ein System entwickelt, Benutzern eine Vergütung (engl.: \textit{reward}) in Form von Bitcoins zu überlassen, wenn diese Rechenleistungen zum Lösen einer bestimmten Aufgabe aufwenden. Gleichzeitig gilt der Coin als Nachweis darüber, dass Arbeit für eine bestimmte Aufgabe aufgewendet wurde \cite{t01_bitcoin}????. Dieser Mechanismus wird als Proof of Work bezeichnet. Proof of Work ist das Herzstück von Bitcoin und der Grund für dessen Wert und Sicherheit vor Angriffen wie Double-Spending. Damit die Berechnung einer Challenge akzeptiert werden kann, muss allerdings sehr viel Rechenleistung investiert werden. So viel, dass man hier von 2,2 bis 9,7 Tonnen CO2 pro Bitcoin zählt. Verglichen mit der Zahl von 1,48 Tonnen CO2 pro Passagier auf einem Flug von San Francisco nach Bonn ist das extrem viel. Die Berechnungen nehmen auch mit wachsender Blockchain zu, da die Schwierigkeit der Challenges zunimmt. Das Problem das hinter dieser Berechnung steckt ist, dass die Lösung danach nicht weiterverwendet werden kann und somit ein Abfallprodukt ist. Das Problem der sogenannten ``nutzlosen'' Berechnungen von Bitcoin wird oft in verschiedenen Literaturen zitiert \cite{01_dshane}. \cite{t01_anderson} und \cite{01_dshane} bezeichnen den Mechanismus hinter Bitcoin sogar als ``Disaster für die Umwelt''. \\
-Hier könnte sich nun die Frage stellen, wieso Proof of Work nicht einfach ersetzt wird? Die Problematik liegt klar auf der Hand:  Es hat trotz des hohen Stromverbrauchs sehr viele Vorteile. Zum einen ist es für seine Zwecke im Hinblick auf Sicherheit sehr erfolgreich und zum anderen sehr robust. Ein natürlicher Ansatz, der dicht gefolgt von der Ersetzungsstrategie kommt, wird im Zuge dieser Ausarbeitung beschrieben und diskutiert: Ersetzen der nutzlosen Berechnungen durch nützliche, die der Gesellschaft einen Mehrwert liefern. Diese Variante des Proof of Work wird auch als Proof of Useful Work \cite{t01_brsv} bezeichnet. Mithilfe dieser Variante soll letztlich sichergestellt werden, dass jede investierte Rechenleistung auch einen Nutzen für die Gesellschaft hat, wodurch der Stromverbrauch global gesenkt werden kann. \cite{t01_brsv} stellt hierfür ein Framework für ein Proof of Useful Work Schema vor, das für Probleme, die auf NP-schwere Probleme wie Orthogonal Vectors Problem, 3SUM oder All Pairs Shortest Path reduzierbar sind \cite{t01_will15}, geeignet ist. \\
-In Abschnitt~\ref{tmp_basics} dieser Ausarbeitung werden zunächst die Grundlagen von Blockchain und Bitcoin eingeführt. Wobei vor allem Wert auf die grundlegende Technologie der Blockchain anhand des Beispiels von Bitcoin gelegt wird. Weiterhin werden erste Umsetzungen von useful Proof of Work Protokollen durch Primecoin \cite{t01_sk13} und Permacoin \cite{t01_mjspk14}. \\
-Im zweiten Abschnitt wird das Framework zu Proofs of Useful Work nach \cite{t01_brsv} vorgestellt. Anhand lassen sich sehr viele Probleme aus der theoretischen Informatik, die beispielsweise auf das Orthognonal Vecotr-Problemreduzierbar sind, in die Berechnung eines Proof of Work integrieren. Weiter werden Kandidaten für ein Proof of Useful Work Schema untersucht und evaluiert. Am Ende dieses Kapitels soll ein neues Blockchain-Schema mit einem Proof of Useful Work Mechanismus das alte Schema von Bitcoin ersetzen können.
-
-Abschließend wird ein Ausblick gegeben.
+Bitcoin \cite{t01_bitcoin} gilt als die erste erfolgreiche digitale Geldwährung. Seinen großen Erfolg verdankt die Währung der zugrundeliegenden Technologie, der Blockchain. Durch die wachsende Aufmerksamkeit, die vor allem durch positive Meldungen vieler Medien vorangetrieben wird \footnote{\url{https://t3n.de/news/bitcoin-erstmals-20000-dollar-887689/}, 17.12.2017}, wächst die Teilnehmerzahl der Bitcoin-Blockchain immer mehr an. \\
+Anders als es bisher jedoch bei zentralen Institutionen in der heutigen Gesellschaft der Regelfall ist, liegen die Coins von Bitcoin nirgendwo zentral in physischer Form auf einer Bank, sondern werden von Computersystemen erzeugt \cite{t01_dshane}. Im Bitcoin-Jargon spricht man auch von ``Mining''. Die Teilnehmer der Blockchain werden als ``Miner'' bezeichnet. Es ist sogar für jede Person mit entsprechender Hardware möglich selbst ``Mining'' zu betreiben, indem Rechenleistung investiert wird. Das auf der Blockchain basierende elektronische Geldsystem hat hierfür ein System entwickelt, Benutzern eine Vergütung (engl.: \textit{reward}) in Form von Bitcoins zu überlassen, wenn diese Rechenleistungen zum Lösen einer bestimmten Aufgabe aufwenden. Gleichzeitig gilt der Coin als Nachweis darüber, dass Arbeit tatsächlich für eine bestimmte Aufgabe aufgewendet wurde \cite{t01_bitcoin}. Dieser Mechanismus wird als Proof of Work bezeichnet. Proof of Work ist das Herzstück von Bitcoin und der Grund für dessen Wert und Sicherheit. Damit die Berechnung einer Challenge akzeptiert werden kann, muss allerdings sehr viel Rechenleistung investiert werden. In Zahlen ausgedrückt sind es von 2,2 bis 9,7 Tonnen CO2 pro Bitcoin \cite{t01_mkhtari}. Im Verglichen mit der Zahl von 1,48 Tonnen CO2 pro Passagier auf einem Flug von San Francisco nach Bonn ist das extrem viel \cite{t01_mkhtari}. Je größer die Kette der Blockchain wird, desto mehr nimmt die Schwierigkeit der Challenges zu. Das Problem, das hinter dieser Berechnung steckt, ist, dass die Lösung einer Challenge danach nicht weiterverwendet werden kann, da es keinen Nutzen liefert und somit lediglich als Abfallprodukt betrachtet werden kann. Das Problem wird oft in Literaturen zitiert \cite{t01_dshane}. \cite{t01_anderson} und \cite{t01_dshane} bezeichnen den Mechanismus hinter Bitcoin sogar als ``Desaster für die Umwelt''. \\
+Die naive Frage, die sich einem sofort stellt, ist, wieso Proof of Work nicht einfach ersetzt werden kann. Tatsächlich gibt es bereits Ansätze, die diesen Gedanken verfolgen wie Proof of Stake \cite{king2012ppcoin} oder Proof of Retrievability \cite{shacham2008compact}. Proof of Work hat trotz des hohen Stromverbrauchs allerdings seine Vorteile. Zum einen ist es für seine Zwecke im Hinblick auf Sicherheit sehr erfolgreich und zum anderen sehr robust. Ein zweiter natürlicher Ansatz wird im Zuge dieser Ausarbeitung beschrieben und diskutiert: Das ersetzen der nutzlosen Berechnungen durch nützliche, die der Gesellschaft einen Mehrwert liefern. Diese Variante des Proof of Work wird auch als Proof of Useful Work \cite{t01_brsv} bezeichnet. Mithilfe dieser Variante soll letztlich sichergestellt werden, dass jede investierte Rechenleistung auch einen Nutzen für die Gesellschaft hat, wodurch der Stromverbrauch global gesenkt werden kann. \cite{t01_brsv} stellt hierfür ein Framework für Proofs of Useful Work vor, das für Probleme geeignet ist, die auf NP-schwere Probleme wie Orthogonal Vectors Problem, 3SUM oder All-Pairs Shortest Path reduzierbar sind \cite{t01_will15}. \\
+Zunächst werden hier die grundlegenden Begriffe definiert und erklärt, die für das Verständnis der folgenden Kapitel notwendig sind. Abschnitt~\ref{tmp_basics} dieser Ausarbeitung führt deswegen zunächst in die Grundlagen von Blockchain und Bitcoin ein. Es wird dabei vor allem Wert auf die grundlegende Technologie der Blockchain anhand von Bitcoin gelegt. Zudem werden erste Umsetzungen von ``useful'' Proof of Work Protokollen durch Primecoin \cite{t01_sk13} und Permacoin \cite{t01_mjspk14} vorgestellt. \\
+In Abschnitt ~\ref{tmp_upow} wird das Framework zu Proofs of Useful Work nach \cite{t01_brsv} beschrieben. Anhand dessen lassen sich sehr viele Probleme aus der theoretischen Informatik, die beispielsweise auf das Orthognonal Vectors Problem reduzierbar sind, in die Berechnung eines Proof of Work integrieren. Weiter werden Kandidaten für ein Proof of Useful Work Schema untersucht und evaluiert. Am Ende dieses Kapitels soll ein neues Blockchain-Schema mit einem Proof of Useful Work Mechanismus das alte Schema von Bitcoin ersetzen können. \\
+Zuletzt wird eine Zusammenfassung der Arbeit gegeben, wobei auf offene Fragen hingewiesen wird, die im Laufe der Arbeit entstanden sind, sowie was Thema weiterer Forschungsarbeit sein könnte.
 
 \section{Grundlagen} % SECTION 2
 \label{tmp_basics}
-\textbf{TODO}
-In diesem Abschnitt werden die Grundlagen der Blockchain und dem elektronische Geldsystem Bitcoin erläutert. Diese bilden das Fundament für spätere Definitionen des Proof of Useful Work. Zunächst wird eine informelle Defenition darüber gegeben, wie der Begriff Nutzen (\textit{engl.: Usefulness}) in dieser AUsarbeitung verwendet wird.
+
+In diesem Abschnitt werden die Grundlagen der \textit{Blockchain} und der darauf basierenden digitalen Währung \textit{Bitcoin} erläutert. Diese bilden das Fundament für eine spätere Definition von \textit{Proof of Useful Work}. Einleitend wird eine informelle Definition darüber gegeben, wie der Begriff \textit{Nutzen} (\textit{engl.: Usefulness}) in dieser Ausarbeitung verwendet wird.
 
 
 % ---------------------------------------------------------------------------
@@ -103,7 +103,7 @@ In diesem Abschnitt werden die Grundlagen der Blockchain und dem elektronische G
 \subsection{Informelle Definition von Usefulness}
 \label{tmp_usefulness} % SECTION 2.1
 
-Unterscheidung in gesellschaftlichen und privaten Nutzen. Unter Nutzen (Usefulness) wird nachfolgend der Benefit, den man aus dem Gebrauch einer Sache ziehen kann verstanden\footnote{https://de.wiktionary.org/wiki/Nutzen}. Dadruch, dass es sich bei der Blockchain um ein verteiltest System in einer Community handelt, wird im Zuge dieser Arbeit die Sichtweise des gesellschaftlichen Nutzens betrachtet. Mehrere Akteure handeln auf der Blockchain. Wieder unterscheide zwischen Sozialem oder wirtschaftlichen Nutzen. Die Betrachtung des gesellschaftlichen Nutzens führt sehr schnell zu einer Philosophischen Frage, auf die ich hier nicht genauer eingehende werde, sondern nur eine Definition ablegen, wie Nutzen im Rahmen meiner Arbeit gewählt wird.
+Unter dem Begriff \textit{Usefulness} wird in den nachfolgenden Abschnitten der Benefit verstanden, den man aus dem Gebrauch einer Sache ziehen kann\footnote{https://de.wiktionary.org/wiki/Nutzen}. Dabei kann es eine Unterscheidung in gesellschaftlichen und privaten Nutzen geben. Aufgrund der Tatsache, dass es sich bei der Blockchain um ein verteiltes System in einer Gemeinschaft (engl.: \textit{community}) handelt, wird im Zuge dieser Arbeit die Sichtweise des gesellschaftlichen Nutzens betrachtet. Die Betrachtung des gesellschaftlichen Nutzens führt sehr schnell zu einer philosophischen Frage, auf die hier aber nicht näher eingegangen werden soll.
 
 
 % ---------------------------------------------------------------------------
@@ -111,28 +111,24 @@ Unterscheidung in gesellschaftlichen und privaten Nutzen. Unter Nutzen (Usefulne
 % ---------------------------------------------------------------------------
 \subsection{Blockchain und Bitcoin} %SECTION 2.2
 \label{tmp_bc}
-Im Allgemeinen handelt es sich bei der Blockchain um ein dezentrales öffentliches Hauptbuch (engl.: \texttt{public ledger}). Um bislang Transaktionen durchführen zu können, vertrauten Kunden „vertrauenswürdigen“ Instanzen, beispielsweise Banken, denen sie ihr Geld oder Daten zur Verwaltung anvertrauten. Diese dritten Instanzen besitzen einen permanenten Zugriff auf privates Geld und Eigentum und können jeder Zeit auf diese zugreifen. Probleme entstehen dann wenn sich eine dritte Instanz fehlverhält und den Zugang zu Daten oder Geld missbrauchen. Andererseits kann auch ein kompromitierter Angreiff auf das zentrale System dazu führen, dass private Daten oder Geld geändert werden oder gestohlen werden können. Mithilfe der Blockchain-Technologie wird nun eine neue Möglichkeit geschaffen, vom zentralen Gedanken der Systeme auf ein dezentrales System umzusteigen. Allgemein formuliert handelt es sich bei der Blockchain um eine dezentrale Datenbank in einem Peer-to-Peer Netzwerk von Computersystemen. Was der Inhalt der Daten auf dieser Datenbank ist, spielt in erster Linie keine Rolle. Es kann sich sowohl um Transaktionsdaten einer Überweisung, digitale Ereignisse oder um Grundbucheinträge handeln. Anders als es bei herkömmlichen Datenbanken jedoch der Fall ist, wird die Blockchain nicht auf einem einzelnen zentralen Server, sondern verteilt auf mehreren Rechnern eines großen Netzwerks, den Netzwerkknoten, gehalten. Jeder Teilnehmer dieses Netzwerks erhält bei Eintritt in die Blockchain eine lokale Kopie von allen Einträgen.
+Im Allgemeinen handelt es sich bei der \textit{Blockchain} um ein dezentrales öffentliches Hauptbuch (engl.: \textit{public ledger}) \cite{swan2015blockchain}. Um bislang Transaktionen durchführen zu können, vertrauten Kunden „vertrauenswürdigen“ dritten Instanzen, beispielsweise Banken, denen sie ihr Geld oder Daten zur Verwaltung anvertrauen. Diese dritten Instanzen besitzen allerdings einen permanenten Zugriff auf private Date und Gelder und können jeder Zeit auf diese zugreifen. Probleme entstehen dann, wenn sich eine dritte Instanz fehlverhält und den Zugang zu Daten resp. Geld missbraucht. Andererseits kann auch ein kompromitierter Angriff auf das zentrale System der Instanz dazu führen, dass private Daten oder Geld geändert werden oder gestohlen werden können. Mithilfe der Blockchain-Technologie wird nun eine neue Möglichkeit geschaffen, vom zentralen Gedanken der Systeme auf ein dezentrales System umzusteigen. Damit handelt es sich bei der Blockchain um eine dezentrale Datenbank in einem Peer-to-Peer Netzwerk von Computersystemen. Was der Inhalt der Daten auf dieser Datenbank ist, spielt in erster Linie keine Rolle. Es kann sich sowohl um Transaktionsdaten einer Überweisung, digitale Ereignisse oder um Grundbucheinträge handeln. Anders als es bei herkömmlichen Datenbanken jedoch der Fall ist, wird die Blockchain nicht auf einem einzelnen zentralen Server, sondern verteilt auf mehreren Rechnern eines großen Netzwerks, den Netzwerkknoten, gehalten. Jeder Teilnehmer dieses Netzwerks erhält bei Eintritt in die Blockchain eine lokale Kopie von allen Einträgen.\\
+In der Blockchain wird jede Transaktion zu einem Block zusammengefasst und mittels kryptographischer Berechnungen mit anderen Transaktionsblöcken zu einer Kette, der „Block-Chain“, verbunden \cite{swan2015blockchain}.
+Ein einzelner Block besteht sowohl aus einem Zeitstempel, Transaktionsdaten sowie aus einem kryptographischen Hash des vorhergehenden gültigen Blocks. Bei der Neuaufnahme eines neuen Blockes in die Blockchain muss per Konsens die Mehrheit aller Teilnehmer des Systems verifizieren, dass dieser Block gültig ist, d.h. dass diese Transaktion tatsächlich stattgefunden hat. Nur und nur dann kann der neue Block in die Blockchain aufgenommen werden. Dadurch dass jeder Teilnehmer eine Kopie der aktuellen Blockchain-Historie erhält, kann die lokale Historie mit der neuen abgeglichen werden. So wird eine mehrheitliche Einigung zwischen den Knoten geschaffen. In der Blockchain wird immer die gesamte Historie an Transaktionen, die jemals durchgeführt wurden, chronologisch linear erweitert \cite{swan2015blockchain}.\\
 
 \begin{figure}[htb]
-	\centerline{\includegraphics*[width=0.8\textwidth]{assets/bc_central_decentral}}
-\caption{Vom Zentralen Gedanken eines System (links) zum dezentralen System (rechts).}
-\label{bild_central_decentral}
+	\centerline{\includegraphics*[width=0.8\textwidth]{assets/blocks}}
+\caption{Verkettung von Transaktionsblöcken über den Hashwert des vorherigen Blocks \cite{t01_bitcoin}.}
+\label{blocks}
 \end{figure}
 
-In der Blockchain wird jede Transaktion zu einem Block zusammengefasst und mittels kryptographischer Berechnungen mit anderen Transaktionsblöcken zu einer Kette, der „Block-Chain“, verbunden. Ein einzelner Block besteht sowohl aus einem Zeitstempel, Transaktionsdaten sowie aus einem kryptographischen Hash des vorhergehenden gültigen Blocks. Bei der Neuaufnahme eines neuen Blockes in die Blockchain muss per Konsens die Mehrheit aller Teilnehmer des Systems verifizieren, dass dieser Block gültig ist, d.h. dass diese Transaktion tatsächlich stattgefunden hat. Nur und nur dann kann der neue Block in die Blockchain aufgenommen werden. Dadurch dass jeder Teilnehmer eine Kopie der aktuellen Blockchain-Historie erhält, kann die lokale Historie mit der neuen abgeglichen und verifiziert werden. So kann eine mehrheitliche Einigung zwischen den Knoten geschaffen werden. In der Blockchain wird immer die gesamte Historie an Transaktionen, die jemals durchgeführt wurden, chronologisch linear erweitert.
-Die kryptographische Verkettung von Transaktionen bildet das Fundament vieler Kryptowährungen. Das wohl bekannteste Beispiel ist die digitale Währung Bitcoin, die im November 2008 mit dem Titel „Bitcoin: A Peer-to-Peer Electronic Cash System”1 von einer unbekannten Einzelperson oder Gruppe mit dem Pseudonym Satoshi Nakamoto entwickelt wurde. Viele bis dahin vorangehende Digitale Währungen scheiterten daran, dass sie durch eine zentrale Instanz verifiziert werden mussten, um das Double Spending Problem zu lösen. Mithilfe der Blockchain-Technologie konnte Nakamoto einen Ansatz beschreiben, der eben dieses Problem löste.
+Die kryptographische Verkettung von Transaktionen bildet das Fundament vieler Kryptowährungen. Das wohl bekannteste Beispiel ist die digitale Währung \textit{Bitcoin}, die im November 2008 mit dem Titel ``Bitcoin: A Peer-to-Peer Electronic Cash System'' \cite{t01_bitcoin} von einer unbekannten Einzelperson oder Gruppe mit dem Pseudonym Satoshi Nakamoto entwickelt wurde. Viele Vorgänger digitaler Währungen scheiterten daran, dass sie durch eine zentrale Instanz verifiziert werden mussten, um das Double-Spending-Problem (vgl. Abschnitt ~\ref{sicherheit}) zu lösen. Mithilfe der Blockchain-Technologie konnte Nakamoto einen Ansatz beschreiben, der eben dieses Problem löste.
 
-\begin{figure}[htb]
-	\centerline{\includegraphics*[width=0.8\textwidth]{assets/blockchain}}
-\caption{Dies ist die Bildunterschrift}
-\label{bild_blockchain}
-\end{figure}
 % ---------------------------------------------------------------------------
 % \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ KONSENSMECHANISMUS \/ \/ \/ \/ \/ \/ \/ \/ \/
 % ---------------------------------------------------------------------------
 \subsubsection{Konsensmechanismus}
 \label{tmp_consens}
-In zentralisierten Organisationen werden Entscheidungen meistens getroffen, indem eine zentrale Instanz die Entscheidung trifft. Da in der Blockchain keine zentrale Entschiedungsinstanz existiert bzw. auf diese bewusst verzichtet werden soll, müssen Entscheidungen anders getroffen werden. Im Fall von Bitcoin wird ein mehrheitlicher Konsens getroffen, indem ein Konsensmechanismus eingeführt wird. Der Konsensmechanismus bezeichnet dabei einen Algorithmus, der eine Einigung über den Status des Netzwerks zwischen den beteiligten (meistens anonymen) Netzwerkknoten schafft. Dies ist die Basis der Blockchain Technologie. Dabei wird sichergestellt, dass alle Teilnehmer eine identische Kopie der Blockchain besitzen. Wie bereits im vorangegangenen Kapitel erwähnt erhöht der Konsensmechanismus die Sicherheit erheblich, da eine Manipulation von Daten ausgeschlossen ist, solange ein Angreifer nicht über 50\% an Stimmen (in Form von Rechenleistung siehe nächstes Kapitel) erhält. Der Hauptgedanke der dahinter steckt ist, dass durch einen dezentralen Konsens-Mechanismus ein zentrale Kontrollinstanz zur Integritätsbestätigung obsolet wird. Es gibt verschiedene Konsensmechanismen wie Proof of Stake, Proof of Space[ABFG14, DFKP15, KK14], Proof of Work und viele mehr. Letzterer Konsensmechanismus wird im Nachfolgenden Abschnitt detaliert betrachtet.
+In zentralisierten Organisationen werden Entscheidungen meistens getroffen, indem eine zentrale Instanz die Entscheidung trifft. Da in der Blockchain keine zentrale Entscheidungsinstanz existiert bzw. auf diese bewusst verzichtet werden soll, müssen Entscheidungen anders getroffen werden. Im Fall von Bitcoin wird ein mehrheitlicher Konsens durch einen Mechanismus bestimmt. Bei dem Konsensmechanismus handelt es sich um einen Algorithmus, der eine Einigung über den Status des Blockchain-Netzwerks zwischen den beteiligten Netzwerkknoten schafft. Dabei wird sichergestellt, dass alle Teilnehmer eine identische Kopie der aktuellen Blockchain besitzen. Wie bereits im vorherigen Abschnitt~\ref{tmp_bc}  erwähnt erhöht der Konsensmechanismus die Sicherheit von Bitcoin erheblich, da eine Manipulation von Daten ausgeschlossen ist, solange ein Angreifer nicht über 50\% an Stimmen erhält (vgl. Abschnitt ~\ref{sicherheit}). Die Idee, die dahinter steckt ist, dass durch einen dezentralen Konsensmechanismus eine zentrale Kontrollinstanz zur Integritätsbestätigung obsolet wird. Für die Blockchain kommen verschiedene Konsensmechanismen wie beispielsweise Proof of Stake \cite{king2012ppcoin}, Proof of Space \cite{ren2016proof}, Proof of Work \cite{t01_bitcoin} u.v.m. in Frage. Letzterer Mechanismus \textit{Proof of Work} wird im nachfolgenden Abschnitt ~\ref{tmp_pow} genauer betrachtet, da dieser die Grundlage für das Proof of Useful Work Protokoll bildet.
 
 % ---------------------------------------------------------------------------
 % \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ Proof of Work \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
@@ -140,9 +136,9 @@ In zentralisierten Organisationen werden Entscheidungen meistens getroffen, inde
 \subsubsection{Proof of Work}
 \label{tmp_pow}
 
-Das Grundprinzip von Proof-of-Work basiert auf der Idee, dass Miner im Netzwerk nachweisen müssen, dass sie einen gewissen Aufwand in Form von Arbeit erbracht haben. Dabei wird Arbeit in Form von Energieverbrauch gemessen. Durch einen konkurrierenden Wettstreit untereinander versuchen verschiedene Miner ein extrem schweres ``kryptographisches Puzzle'' zu lösen. Der erste Miner, der dieses Puzzle löst gewinnt und kann den neuen Block in die Blockchain anfügen. Damit Miner einen Anreiz bekommen an diesem Wettstreit teilzunehmen, bekommt jeder Gewinner einen Reward, im Fall von Bitcoin sind es 12.5 neu erstellte Bitcoins und eine kleine Transaktionsgebühr. [https://www.coindesk.com/short-guide-blockchain-consensus-protocols/]
+Das Grundprinzip von Proof of Work basiert auf der Idee, dass Miner im Netzwerk nachweisen müssen, dass sie einen gewissen Aufwand in Form von Arbeit erbracht haben. Dabei wird Arbeit in Form von Energieverbrauch gemessen. Durch einen konkurrierenden Wettstreit untereinander versuchen verschiedene Miner ein extrem schweres ``kryptographisches Puzzle'' zu lösen. Der erste Miner, der dieses Puzzle löst gewinnt und kann den neuen Block in die Blockchain anfügen. Damit Miner einen Anreiz bekommen an diesem Wettstreit teilzunehmen, bekommt jeder Gewinner eine Vergütung, im Fall von Bitcoin ist es eine gewisse Anzahl an Bitcoins, die sich an die Größe der Blockchain anpasst.
 
-Proof of Work ist keine Neuentwicklung von Bitcoin \cite{t01_bitcoin}, sondern wurde bereits früher gegen Denial of Service Attacken und für den E-Mail-Versand als Mechanismus gegen ``Spam'' eingesetzt \cite{t01_brsv} \cite{t01_dn92}. Um eine E-Mail zu versenden, musste der Sender vereinfacht ausgedrückt zusätzliche Berechnungen durchführen. Da die Maschinen in ihrer Rechenkapazität 1992 beschränkt waren, ist es notwendig gewesen, hohe Investitionen zu tätigen, um die Berechnungen durchzuführen und letztlich E-Mails zu versenden. Dadurch sollten die Kosten zum Versenden von E-Mails hoch genug sein, dass sich der Versand für ``Spammer'' nicht mehr lohnt. Der Empfänger einer E-Mail konnte nämlich auf einfache Art prüfen, ob die Berechnungen korrekt durchgeführt wurden. Die Berechnungen für den Sender hingegen waren mit einem gewissen Aufwand verbunden.
+Proof of Work ist keine Neuentwicklung von Bitcoin, sondern wurde bereits früher gegen Denial of Service Attacken und für den E-Mail-Versand als Mechanismus gegen ``Spams'' eingesetzt \cite{t01_brsv} \cite{t01_dn92}. Um eine E-Mail zu versenden, musste der Sender vereinfacht ausgedrückt zusätzliche Berechnungen durchführen. Da die Maschinen in ihrer Rechenkapazität 1992 beschränkt waren, ist es notwendig gewesen, hohe Investitionen zu tätigen, um die Berechnungen durchzuführen und letztlich E-Mails zu versenden. Dadurch sollten die Kosten zum Versenden von E-Mails hoch genug sein, dass sich der Versand für ``Spam''-Mails nicht mehr lohnen sollte. Der Empfänger einer E-Mail konnte nämlich auf einfache Art prüfen, ob die Berechnungen korrekt durchgeführt wurden. Die Berechnungen für den Sender hingegen waren mit einem gewissen Aufwand verbunden.
 
 \begin{mydef}
   In \cite{t01_brsv} werden drei für das Proof of Work wesentliche Algorithmen vorgestellt:
@@ -155,43 +151,20 @@ Proof of Work ist keine Neuentwicklung von Bitcoin \cite{t01_bitcoin}, sondern w
   \label{def_pow}
 \end{mydef}
 
-Im späteren Abschnitt~\ref{tmp_upow} wird auf Grundlage obiger Defintion~\ref{def_pow} eine Modifizierung des Proof of Work Protokolls im Hinblick auf Usefulness nach \cite{t01_brsv} beschrieben. \\
-Besonders auffällig ist, dass die Algorithmen \code{Gen} und \code{Verify} eine lineare Laufzeit als obere Schranke besitzen und \code{Solve} möglichst schwer eine Lösung für eine zufällig generierte Challenge finden soll. Man spricht an dieser Stelle auch von Hardness (dt.: Schwere) \cite{t01_will15}. Für die Laufzeit von \code{Solve} wird eine Zeit $t(n)$ vorgegeben. Das Ziel ist es, dass jede richtige Lösung eines Miners, die durch den \code{Solve}-Algorithmus berechnet wird, von \code{Verify} akzeptiert wird. Alelrdings soll \code{Verify} mit möglichst hoher Wahrscheinlichkeit alles ablehnen, das die Zeit von $t(n)^{1-\varepsilon}$ für jedes $\varepsilon > 0$ unterschritten hat.\cite{t01_brsv} \\
-Insgesamt ergibt sich also für ein Problem, das sich für ein Proof of Work Schema eignen soll, dass es so schwer sein soll, dass eine Lösung schwer zu finden ist und falls eine Lösung gefunden wird, soll diese schnell und effizient verifizierbar sein. Im Fall von Bitcoin wird als Challenge ein SHA256-Hash berechnet, der eine gewisse Anzahl an führenden Nullen enthält.
+Im späteren Abschnitt~\ref{tmp_upow} wird auf Grundlage obiger Definition~\ref{def_pow} eine Modifizierung des Proof of Work Protokolls im Hinblick auf Usefulness nach \cite{t01_brsv} beschrieben. \\
+Besonders auffällig ist, dass die Algorithmen \code{Gen} und \code{Verify} eine lineare Laufzeit als obere Schranke besitzen und \code{Solve} möglichst schwer eine Lösung für eine zufällig generierte Challenge finden soll. An dieser Stelle wird auch von \textit{Hardness} (dt.: \textit{Schwere}) \cite{t01_will15} gesprochen. Für die Laufzeit von \code{Solve} wird eine Zeit $t(n)$ vorgegeben. Das Ziel ist es, dass jede richtige Lösung eines Miners, die durch den \code{Solve}-Algorithmus berechnet wird, von \code{Verify} akzeptiert wird. Allerdings soll \code{Verify} mit möglichst hoher Wahrscheinlichkeit alles ablehnen, das die Zeit von $t(n)^{1-\varepsilon}$ für jedes $\varepsilon > 0$ unterschritten hat \cite{t01_brsv}. \\
+Insgesamt ergibt sich also für ein Problem, das sich für ein Proof of Work Schema eignen soll, dass es so schwer sein soll, dass eine Lösung schwer zu finden ist und falls eine Lösung gefunden wird, soll diese schnell und effizient verifizierbar sein. Aus der Schwierigkeit, eine bestimmte Ausgabe für die Challenge zu finden ergibt, sich die \textit{Difficulty}. Beispielsweise wird im Fall von Bitcoin eine Anzahl an führenden Nullen der Ausgabe der Hashfunktion vorgegeben. So kann durch mehr Nullen ein höherer Schwierigkeitsgrad erreicht werden, um eine Lösung zu finden.
 
-\begin{figure}[htb]
-	\centerline{\includegraphics*[width=0.8\textwidth]{assets/blocks}}
-\caption{Dies ist die Bildunterschrift}
-\label{tmp_Bild1}
-\end{figure}
-
-Die Idee hinter der Blockchain ist, ein dezentrales Transaktionsbuch zu speichern. Daraus ergibt sich ein Vertrauensproblem, da viele Teilnehmer des Netzwerks in der Regel auf eine zentrale „trusted party“ vertrauen müssen. Um diesen unerwünschten Nebeneffekt zu umgehen, nutzt man Konsens-Algorithmen, die es ermöglichen, dass jeder Teilnehmer prüfen kann, ob seine Blockchain den Regeln entspricht.
-
-% ---------------------------------------------------------------------------
-% \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ DIFFICULTY \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
-% ---------------------------------------------------------------------------
-\subsubsection{Difficulty}
-\textbf{TODO}
-Im Zusammenhang von PoW ergibt sich die Difficulty aus der Schwierigkeit, den gewünschten Output der Hashfunktion zu finden. Im Fall von Bitcoin wird bspw. vorgegeben, wie viele Nullen der Output am Anfang des Strings besitzen muss. Je mehr Nullen gefordert sind, desto schwieriger wird es schließlich, den Output zu finden. Das lässt sich leicht mit einem Lottospiel veranschaulichen: Zwei Richtige zu treffen ist wesentlich einfacher, als Sechs Richtige der vorgegebenen Zahlen zu treffen.
 
 % ---------------------------------------------------------------------------
 % \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ SECURITY \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
 % ---------------------------------------------------------------------------
 \subsubsection{Sicherheit}
-\textbf{TODO}
-PoW’s security relies on the principle that no entity should gather more than 50\% of the processing power because such an entity can effectively control the system by sustaining the longest chain. We now briefly outline known attacks on existing PoW-based blockchains. First, an adversary can attempt to double-spend by using the same coin(s) to issue two (or more) transactions—thus effectively spending more coins than he possesses. Recent studies have shown that accepting transactions without requiring blockchain confirmations is insecure [23]. The more confirmations a transaction obtains, the less likely this transaction will be reversed in the future. Second, miners might attempt to perform selfish mining [15] attacks in order to increase their relative mining share in the blockchain, by selectively withholding mined blocks and only gradually publishing them [15, 32]. Recent studies show that, as a result of these attacks, a selfish miner equipped with originally 33\% mining power can effectively earn 50\% of the mining power. Double-spending attacks and selfish mining can be alleviated if all nodes in the blockchain system are tightly synchronised. Note that, in addition to network latency, synchronisation delays can be aggravated due to eclipse attacks [18,19] where an adversary creates a logical partition in the network, i.e., provides contradicting block and transaction information to different blockchain network nodes.
-
-Erwähne unbedingt double spending!
-
-% ---------------------------------------------------------------------------
-% \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ BYZANTINE FAULT \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
-% ---------------------------------------------------------------------------
-\subsubsection{The Byzantine Fault Tolerance}
-\label{tmp_byzantine}
-\textbf{TODO}
-Als byzantinische Fehler bezeichnet man in der Informationstechnik Fehler, bei denen sich ein System beliebig falsch verhalten kann. Beispielsweise schickt ein Server gelegentlich falsche Antworten und erreicht gelegentlich falsche Systemzustände. Ein byzantinischer Fehler beschreibt im Allgemeinen ein schwierig zu erfassendes Fehlermodell.
-
-In Mehrprozessor-Systemen bezeichnet der byzantinische Fehler eine Fehlerklasse. Falls eine Komponente an verschiedene Prozessoren unterschiedliche (protokollkonforme) Ergebnisse liefert, spricht man von einem byzantinischen Fehler. Bei der Planung wird davon ausgegangen, dass x Prozessoren bösartig arbeiten und das System maximal stören wollen.
+\label{sicherheit}
+Die Sicherheit von Proof of Work basiert auf dem Ansatz, dass kein Teilnehmer mehr als 50\% der Rechenleistung besitzen darf. Ansonsten kann ein einziger Teilnehmer die Blockchain kontrollieren, indem er die längste Kette beherrscht. Zwei der bekanntesten Angriffe auf die Blockchain, die hier kurz erläutert werden sollen, sind das Double-Spending-Problem und das Selfisch Mining \cite{t01_gkwg16} . \\
+Der Gedanke hinter Double-Spending ist einen Coin zweimal für mehrere Transaktionen zu verwenden. Damit würde ein Angreifer mehr Coins verwenden, als er eigentlich besitzt.\\
+Beim Selfish Mining (dt.: egoistisches Schürfen) behält ein einzelner Miner einen gültigen berechneten Block erst einmal für sich und veröffentlicht diesen später, um diesen an die Blockchain zu hängen. So verschafft sich der Miner einen Vorteil gegenüber anderen, indem er den nächsten Block anfängt zu berechnen. Die übrigen Miner würden so Berechnungen durchführen, die dann eventuell wieder verworfen werden müssen, da der Selfish Miner gewinnt. \cite{t01_gkwg16} hat Studien dazu untersucht, die belegen, dass ein Selfish Miner mit ursprünglichen 33\% Mining Power eine effektive Leistung von 50\% erhalten kann.\\
+Laut \cite{t01_gkwg16} können die Angriffe Double-Spending und Selfish Mining dadurch verringert werden, indem alle Knoten des Systems immer synchronisiert sind.
 
 
 % ---------------------------------------------------------------------------
@@ -199,25 +172,26 @@ In Mehrprozessor-Systemen bezeichnet der byzantinische Fehler eine Fehlerklasse.
 % ---------------------------------------------------------------------------
 \subsection{Altcoins}
 
-Neben Bitcoin gibt es zahlreiche alternative Kryptowährungen, sogenannte ``Altcoins''~\footnote{``Altcoins'' steht für engl.: alternative coins. \url{https://en.bitcoin.it/wiki/Altcoin}}, die versuchen die Technologie hinter Bitcoin zu verbessern. Nachfolgend werden zwei reale Umsetzungen vorgestellt, die Usefulness umsetzen: Primecoin \cite{t01_sk13} und Permacoin \cite{t01_mjspk14}. Erstere Währung beschreibt eine Umsetzung von Usefulness, die sehr stark in die Richtung von \cite{t01_brsv} geht und statt Hash-Berechnungen eine Berechnung von Primzahlen vorschlägt. Permacoin setzt die Usefulness interessanter Weise auf einen ganz anderen Weg um. Statt einem Proof of Work wird ein Proof of Space vorgenommen, bei dem ein Teilnehmer des Blockchain-Netzwerks beweist eine gewisse Kapazität an Speicherressourcen zu besitzen.
+Neben Bitcoin gibt es zahlreiche alternative digitale Währungen, sogenannte ``Altcoins''~\footnote{``Altcoins'' steht für engl.: alternative coins. \url{https://en.bitcoin.it/wiki/Altcoin}}, die versuchen die Technologie hinter Bitcoin zu verbessern. Nachfolgend werden zwei reale Umsetzungen von Usefulness vorgestellt: Primecoin \cite{t01_sk13} und Permacoin \cite{t01_mjspk14}. Erstere Währung beschreibt eine Umsetzung von Usefulness, die sehr stark in die Richtung von \cite{t01_brsv} geht und statt Hash-Berechnungen eine Berechnung von Primzahlen vorschlägt. Permacoin setzt die Usefulness interessanter Weise auf einen ganz anderen Weg um. Statt einem Proof of Work wird ein Proof of Space vorgenommen, bei dem ein Teilnehmer des Blockchain-Netzwerks beweist eine gewisse Kapazität an Speicherressourcen zu besitzen.
+
 % ---------------------------------------------------------------------------
 % \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ PRIMECOIN \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
 % ---------------------------------------------------------------------------
 \subsubsection{Primecoin}
 \label{tmp_primecoin}
 
-Der größte Kritikpunkt der immer wieder im Zusammenhang mit Bitcoin und dessen Proof of Work Protokoll unter Experten auftaucht ist, dass die Berechnung zum Minen von Blöcken, also das Lösen einer Challenge, keinen nachhaltigen Wert besitzt \cite{t01_mjspk14} \cite{t01_brsv} \cite{01_dshane}. Wie schon bereits erwähnt hat das Proof of Work bei Pitcoin keinen anderen Sinn als zu beweisen, dass Energie aufgewendet wurde und man sich somit qualifiziert Blöcke zur Blockchain hinzuzufügen. Trotzdem ist das Proof of Work Protokoll ein wichtiger Kernmechanismus von Bitcoin, um das Double-Spending-Problem zu lösen und  Sicherheit zu garantieren. Wie in den vorangegangen Abschnitten bereits erwähnt haben die Berechnungen von SHA256-Hashes keinen Nutzen außerhalb der Bitcoin-Welt.
+Der größte Kritikpunkt der immer wieder im Zusammenhang mit Bitcoin und dessen Proof of Work Protokoll unter Experten auftaucht ist, dass die Berechnung zum Minen von Blöcken, also das Lösen einer Challenge, keinen nachhaltigen Wert besitzt \cite{t01_mjspk14} \cite{t01_brsv}. Wie schon bereits erwähnt hat das Proof of Work bei Bitcoin keinen anderen Sinn als zu beweisen, dass Energie aufgewendet wurde und man sich somit dazu qualifiziert Blöcke zur Blockchain hinzuzufügen. Trotzdem ist das Proof of Work Protokoll ein wichtiger Konsensmechanismus, um das Double-Spending-Problem zu lösen und  Sicherheit zu garantieren. Wie in den vorherigen Abschnitten bereits erwähnt haben die Berechnungen von SHA256-Hashes keinen Nutzen außerhalb der Bitcoin-Welt.
 
-Primecoin versucht diesen Trade-off auf effiziente Weise zu lösen. Es ist die erste Kryptowährung, die auf dem Proof of Work-Mechanismus basiert und Berechnungen durchführen lässt, die für die weitere Verwendung von Nutzen ist. Statt also einer SHA256-Hashes müssen Miner bei Primecoin lange Primzahlenketten finden. Dafür werden drei Arten von Primzahlenketten definiert, die sich für das Proof of Work Protokoll eignen: Cunningham Chain (CC) 1. Art, CC 2. Art und Bi-twin chain.
+Primecoin \cite{t01_sk13} versucht diesen Trade-off auf effiziente Weise zu lösen. Es ist die erste digitale Peer-to-Peer Währung, die auf dem Proof of Work-Mechanismus basiert und Berechnungen durchführen lässt, die für die weitere Verwendung von Nutzen ist. Statt also einer SHA256-Hashes müssen Miner bei Primecoin lange Primzahlenketten finden. Dafür werden von \cite{t01_sk13} drei Arten von Primzahlenketten definiert, die sich für das Proof of Work Protokoll eignen: Cunningham Chain (CC) 1. Art, CC 2. Art und Bi-twin chain.
 
-\textbf{Cunningham Chain 1. Art}. Bei der Cunninghamchain muss jede Primzahl der Kette um ein größer als das doppelte der vorhergehenden Primzahl sein:
+\textbf{Cunningham Chain 1. Art}. Die Cunningham Chain 1. Art gibt vor, dass jede Primzahl um eins verringert als das doppelte des Vorgängers ist.
 
 \begin{bsp}
   Cunningham-Kette der Länge 5: 1531, 3061, 6121, 12241, 24481
 \end{bsp}
 
 
-\textbf{Cunningham Chain 2. Art}. Die Cunningham Chain 2. Art gibt vor, dass jede Primzahl um eins verringert als das doppelte des Vorgängers ist.
+\textbf{Cunningham Chain 2. Art}. Bei der Cunningham Chain 2. Art muss jede Primzahl der Kette um eins größer als das doppelte der vorhergehenden Primzahl sein:
 
 \begin{bsp}
   Cunningham-Kette der Länge 5: 2, 5, 11, 23, 47
@@ -229,7 +203,8 @@ Primecoin versucht diesen Trade-off auf effiziente Weise zu lösen. Es ist die e
 \end{bsp}
 
 
-Nun könnte hier die Frage gestellt werden, inwiefern ein Nutzen in den Berechnungen von Primzahlen vorliegt oder ob es lediglich eine ebenso sinnlose Berechnung wie die Berechnung von SHA256 Hashes sei. Es gibt viele Anwendungsgebiete aus der Mathematik, die sich mit der Suche nach großen Ketten von Primzahlen beschäftigt. Unter anderem die Suche nach Mersenne Primzahlen \footnote{\url{https://en.wikipedia.org/wiki/Mersenne_prime}} oder das Primzahlen Theorem\footnote{\url{https://en.wikipedia.org/wiki/Prime_number_theorem}}. Die folgende Liste der University of Tennesseee listet Gründe für die Suche nach Primzahlen auf: \url{http://primes.utm.edu/notes/faq/why.html}.
+Nun könnte hier die Frage gestellt werden, inwiefern ein Nutzen in den Berechnungen von Primzahlen vorliegt oder ob es auch nur wieder eine ebenso sinnlose Berechnung wie die Berechnung von SHA256 Hashes sei. Es gibt viele Anwendungsgebiete aus der Mathematik, die sich mit der Suche nach großen Ketten von Primzahlen beschäftigt. Unter anderem die Suche nach Mersenne Primzahlen \footnote{\url{https://en.wikipedia.org/wiki/Mersenne_prime}} oder das Primzahlen Theorem\footnote{\url{https://en.wikipedia.org/wiki/Prime_number_theorem}}. Die folgende Liste der University of Tennessee listet Gründe für die Suche nach Primzahlen auf: \url{http://primes.utm.edu/notes/faq/why.html}.
+
 
 % ---------------------------------------------------------------------------
 % \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ PERMACOIN \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
@@ -237,29 +212,27 @@ Nun könnte hier die Frage gestellt werden, inwiefern ein Nutzen in den Berechnu
 \subsubsection{Permacoin}
 \label{tmp_permacoin}
 
-Einen anderen Ansatz einer nützlichen Alternative zu Bitcoin im Vergleich zu Primecoin liefert Microsoft in Zusammenarbeit mit der University of Maryland mit Permacoin\cite{t01_mjspk14}, bei dem die Blockchain als verteilter Speicher von Archivdaten dienen soll. Miner sollen nicht mehr nur reine Rechenleistung aufwenden, sondern vielmehr ungenutzten Speicherplatz zur Verfügung stellen, weshalb er vielmehr zu dem Konsensmechanismus Proof of Retrievabilty (POR) eingeordnet werden kann.
-
-Der Grundgedanke, der hinter Permacoin steckt ist, dass statt Rechenleistung Speicherplatz für das Erzeugen neuer Block aufgewendet wird. Im POR Protokoll wird bewiesen, dass ein Knoten des Netzwerks Speicherressourcen für das Abspeichern von Dateien oder Dateifragmenten aufwendet\cite{t01_mjspk14}. \cite{t01_mjspk14} schlägt ein Verteiltes Daten-Archiv vor, das so vor Datenverlusten geschützt werden soll.
+Einen anderen Ansatz einer nützlichen Alternative zu Bitcoin im Vergleich zum vorherigen Beispiel Primecoin liefert Microsoft in Zusammenarbeit mit der University of Maryland mit Permacoin \cite{t01_mjspk14}, bei dem die Blockchain als verteilter Speicher von Archivdaten dienen soll. Miner sollen nicht mehr nur reine Rechenleistung aufwenden, sondern vielmehr ungenutzten Speicherplatz zur Verfügung stellen, weshalb er vielmehr zu dem Konsensmechanismus Proof of Retrievabilty (POR) eingeordnet werden kann.\\
+Der Grundgedanke, der hinter Permacoin steckt, ist, dass statt Rechenleistung Speicherplatz für das Erzeugen neuer Block aufgewendet wird. In POR wird bewiesen, dass ein Knoten des Netzwerks Speicherressourcen für das Abspeichern von Dateien oder Dateifragmenten aufwendet\cite{t01_mjspk14}. \cite{t01_mjspk14} schlägt ein verteiltes Daten-Archiv vor, das so vor Datenverlusten geschützt werden soll.
 
 % ---------------------------------------------------------------------------
 % \/ \/ \/ \/ \/ \/ \/ \/ \/ PROOFS OF USEFUL WORK \/ \/ \/ \/ \/ \/ \/ \/ \/
 % ---------------------------------------------------------------------------
 \section{Proofs of Useful Work}
 \label{tmp_upow}
-Ein Proof of Useful Work (uPoW) nach \cite{t01_brsv} muss ebenso wie ein PoW der Hardness-Anforderung gerecht werden. Damit ist gewährleistet, dass der Prover tatsächlich Abreit aufgewendet hat. Weiterhin muss uPoW aber auch einen Nutzen (engl. Usefulness) erzeugen, der schnell verifizierbar und einfach rekonstruierbar ist.
+Ein Proof of Useful Work (uPoW) nach \cite{t01_brsv} muss ebenso wie ein Proof of Work (PoW) der Hardness-Anforderung gerecht werden. Damit ist gewährleistet, dass der Prover tatsächlich Arbeit aufgewendet hat. Weiterhin muss uPoW aber auch einen Nutzen (engl. \textit{Usefulness}) erzeugen, der effizient zu verifizieren ist.
 
-Die Ziele, die sich nach \cite{t01_brsv} für den Entwurf eines Proof of Useful Work Schemas ergeben ist die Betrachtung der folgenden beiden Eigenschaften:\\
-\textbf{Hardness}. Challenges können so verteilt werden, dass eine Lösung für die Challenge Aufwand in Form von Arbeit oder Energie garantiert. \\
-\textbf{Usefulness}. Aufgaben können als Challenge so delegiert werden, dass die Lösung der Worker schnell und effizient verifizierbar rekonstruiert werden kann.
-
-\textbf{TODO}
-[NOCHMAL ÜBERARBEITEN. SIEHT AUS WIE IM PAPER]
-
-Die größte Herausforderung ist, dass beide Eigenschaften immer für ein uPoW gelten und stets zusammen betrachtet werden müssen, da ohne Hardness einerseits kein Proof of Work möglich ist und andererseits ohne Usefulness kein die Berechnungen von Proof of Work keinen nutzen haben. Angenommen es werden nur triviale Challenges generiert, die ein Worker ohne intensive Rechenleistung löst, so gibt es keinen Nachweis der Arbeit und die Hardness-Bedingung wird gebrochen. Das wiederum ist allerdings die Grundvoraussetzung für Proof of Work.
-Wird dagegen Hardness gewährleistet, aber zufällige Challenges so geneiert, dass sie nicht mehr rekonstruiert werden können, geht der Nutzen verloren, ein bestimmtes Problem zu lösen, was somit gegen die Usefulness verstößt. Bei Bitcoin's Proof of Work werden Challenges mit dem Algorithmus \code{Gen()} zufällig generiert, sodass das Mapping von $x$ auf $f(x)$ nicht möglich ist. In einem Proof of Useful Work Protokoll benötigen wir allerdings zusätzlich noch einen Algorithmus, der die Verbindung zwischen einer Lösung und einer Challenge wiederherstellt und ein $f(x)$ rekonstruiert. \cite{t01_brsv} definieren dafür einen Algorithmus \code{Recon($c_x$, s)} zur Rekonstruktion (engl.: reconstruction) von $f(x)$. Der Algorithmus nimmt eine Challenge $c_x$ entgegen und rekonstruiert basierend auf der Challenge $f(x)$.
-Insgesamt werden vier Algorithmen (drei aus dem Proof of Work Protokoll ~\ref{tmp_pow} und zusätzlich der \code{Recon}-Algorithmus) eingeführt:
+Die Ziele, die sich nach \cite{t01_brsv} für den Entwurf eines Proof of Useful Work Schemas ergeben, ist die Betrachtung der folgenden beiden Eigenschaften:
 \begin{itemize}
-  \item \code{Gen(x)} - randomisierter Algorithmus, der eine Challenge $c_x$ in $mathcal{O}(n)$ erzeugt.
+  \item[] \textbf{Hardness}. Die Lösungen delegierter Aufgaben sollen Aufwand in Form von Arbeit oder Energie garantieren.
+  \item[] \textbf{Usefulness}. Aufgaben so an Teilnehmer delegiert werden, dass eine Lösung schnell und effizient verifizierbar ist und rekonstruiert werden kann.
+\end{itemize}
+
+Die größte Herausforderung ist, dass beide Eigenschaften immer für ein uPoW gelten müssen und stets zusammen betrachtet werden müssen, da ohne Hardness einerseits kein Proof of Work möglich ist und andererseits ohne Usefulness die Berechnungen von Proof of Work keinen Nutzen liefern. Angenommen es werden nur triviale Challenges generiert, die ein Worker ohne intensive Rechenleistung löst. So gibt es keinen Nachweis der Arbeit und die Hardness-Bedingung wird nicht erfüllt. Das ist allerdings die Grundvoraussetzung für Proof of Work. \\
+Wird dagegen Hardness gewährleistet, aber zufällige Challenges so generiert, dass sie nicht mehr rekonstruiert werden können, geht der Nutzen verloren, ein bestimmtes Problem zu lösen, was somit gegen die Usefulness verstößt. Bei Bitcoin's Proof of Work werden Challenges mit dem Algorithmus \code{Gen()} zufällig generiert, sodass das Mapping von $x$ auf $f(x)$ nicht möglich ist. In einem Proof of Useful Work Protokoll benötigen wir allerdings zusätzlich noch einen Algorithmus, der die Verbindung zwischen einer Lösung und einer Challenge wiederherstellt und ein $f(x)$ rekonstruiert. \cite{t01_brsv} definieren dafür einen Algorithmus \code{Recon($c_x$, s)}. Der Algorithmus nimmt eine Challenge $c_x$ entgegen und rekonstruiert basierend auf der Challenge $f(x)$.
+Insgesamt werden vier Algorithmen (drei aus dem Proof of Work Protokoll ~\ref{tmp_pow}  und der neue \code{Recon}-Algorithmus) eingeführt:
+\begin{itemize}
+  \item \code{Gen(x)} - randomisierter Algorithmus, der eine Challenge $c_x$ in $\mathcal{O}(n)$ erzeugt.
   \item \code{Solve($c_x$)} - Algorithmus, der eine Lösung $s$ zu einer Challenge $c_x$ findet.
   \item \code{Verify($c_x$, s)} - Algorithmus, der verifizieren kann, ob eine Lösung $s$ zu einer Challenge $c_x$ richtig ist.
   \item \code{Recon($c_x$, s)} -  Algorithmus, der eine Verbindung zwischen Lösung und Probleminstanz erzeugt.
@@ -267,146 +240,96 @@ Insgesamt werden vier Algorithmen (drei aus dem Proof of Work Protokoll ~\ref{tm
 
 Daraus ergibt sich die nachfolgende Definition ~\ref{def_uPoW} für ein Proof of Useful Work nach \cite{t01_brsv}:
 \begin{mydef}[Proof of Useful Work]
-  Ein Proof of Useful Work Mechanismus besteht aus den vier Algorithmen \code{Gen}, \code{Solve}, \code{Verify} und \code{Recon}, für die folgende Eigenschaften gelten sollen:
+  Ein Proof of Useful Work Mechanismus besteht aus den vier Algorithmen \code{Gen}, \code{Solve}, \code{Verify} und \code{Recon}, für die die folgenden Eigenschaften gelten sollen:
   \begin{itemize}
     \item \textbf{Efficiency}: \code{Gen}, \code{Verify} und \code{Recon} sollen eine effiziente Laufzeit besitzen
-    \item \textbf{Completeness}: Pr[Verify(c,s) = accept] = 1
-    \item \textbf{Soundness}: Pr[Verify(c,s) = accept] = 1
-    \item \textbf{Hardness}:
-    \item \textbf{Usefulness}:
+    \item \textbf{Completeness}: Pr[Verify(c,s) = accept] = 1, für jede Challenge $c$ und Lösung $s$
+    \item \textbf{Soundness}: Pr[Verify(c,s) = accept] < neg(n), für jede Challenge $c$, Lösung $s$, sodass Recon(c,s) $ \neq f(x)$
+    \item \textbf{Hardness}: Für jedes Polynom l, jedes $x_1,…x_{l(n)}$ und jeden Algorithmus $Solve_l$, der eine Laufzeit in $l(n) \cdot t(n)^{1-\varepsilon}$ besitzt, wobei $l(n)$ Challenges gegeben sind, soll gelten: \\$Pr[\forall i: Verify(c_i,s_i)=accept|(c_i \gets Gen(x_i))_{i \in [l(n)]}, (s_1,…,s_{l(n)}) \gets Solve_l(c_1,….,c_{l(n)})] < \delta(n)$
+    \item \textbf{Usefulness}: {Recon(c,s) = f(x)}
   \end{itemize}
   \label{def_uPoW}
 \end{mydef}
 
-Ohne Hardness und Usefulness beschreibt die Definition ~\ref{def_uPoW} ein Proof-System wie es auch [Will16] beschreibt. Für die gewährleistung eines Proof of Useful Work Frameworks müssen Hardness und Usefulness immer enthalten sein. Ein einfaches Proof of Work würde ohne dem \code{Recon}-Algorithmus und ohne der Bedingung von Soundness auskommen. Bei einem PoW sind wir nicht daran interessiert, ob eine Lösung korrekt ist, sondern nur ob das FInden der Lösung Arbeit gekostet hat, das wiederum durch Hardness gegeben ist. Umso wichtiger wird diese Bedingung für einen uPoW-Schema, bei dem es uns daran gelegen ist aus einer Berechnung einen Mehrwert zu ziehen und nicht Fake-Berechnungen zuzulassen, die wir gar nicht erhalten wollten. Ball et al. beweisen Proofs of Useful Work für das k-Orthogonale Vektoren Problem, 3SUM und APSP. Darüberhinaus lassen sich weitere NP-schwere Probleme auf diese Probleme reduzieren. Besonders Eigenschaften aus der Graphentheorie passen auf das kOV-Problem
-
+Für die gewährleistung eines Proof of Useful Work Frameworks müssen Hardness und Usefulness immer enthalten sein. Ein einfaches Proof of Work würde ohne dem \code{Recon}-Algorithmus und ohne die Bedingung von Soundness auskommen. Bei einem PoW sind leigt kein Interesse daran, ob eine Lösung korrekt ist, sondern nur, ob das Finden einer Lösung Arbeit gekostet hat, was die Hardness-Bedingung erfüllt. Umso wichtiger wird diese Bedingung für ein uPoW-Schema, bei dem es uns daran gelegen ist aus einer Berechnung einen Mehrwert zu ziehen und keine Fake-Berechnungen zuzulassen. \cite{t01_brsv} beweist Proofs of Useful Work für das k-Orthogonal Vectors Problem (kOV), 3SUM und APSP. Darüber hinaus lassen sich weitere NP-schwere Probleme auf diese Probleme reduzieren \cite{t01_brsv} \cite{t01_will15}. Besonders Eigenschaften aus der Graphentheorie passen auf das kOV-Problem.
 
 \subsection{Herausforderungen}
-Die Herausforderungen, die sich also für ein Proof of Useful Work ergben sind zum Einen Challenges zu finden, die die Hash-Berechnungen von Bitcoin ersetzen können und zum anderen müssen Probleminstanzen die fünf Eigenschaften aus Definition ~\ref{def_uPoW} erfüllen. Die Größte Herausforderung eines uPoW-Entwurfs ist stets die zwei Bedingungen \textit{Hardness} und \textit{Usefulness} zusammen zu betrachten. Wichtig für Probleminstnanzen ist, dass gefundene Lösungen effizient verifizierbar sind. Da Wahl willkürlicher Probleminstanzen kann dazu führen, dass eine Hardness nicht gewährleistet werden kann. Dies wäre im einfachsten Fall beispielsweise willkürlich sich eine Primzahl ausgeben zu lassen ohne eine Invariante zu definieren. So könnte die Antwort eines Provers die Zahl ``2'' lauten. Es ist offensichtlich, dass hier keine Arbeit investiert wurde. Gibt es Probleminstanzen, die zwar die Hardness-Bedingung erfüllen allerdings zufällig ausgewählt werden, sodass sie nicht reproduzierbar sind, führt das zum bruch der Usefulness.  Darüber hinaus muss im Sinne der Usefulness ebenfalls gelten, dass falsche Berechnungen erkannt werden können. Weiterhin muss betrachtet werden ob ein entsprechendes Framework in die Blockchain passt. So müsste im Fall von Bitcoin ein Upgrade über einen Hardfork, Softfork,.... geschehen.
+Die Herausforderungen, die sich also für ein Proof of Useful Work ergeben sind zum Einen Challenges zu finden, die die Hash-Berechnungen von Bitcoin ersetzen können und zum anderen müssen Probleminstanzen die fünf Eigenschaften aus Definition ~\ref{def_uPoW} erfüllen. Die Größte Herausforderung eines uPoW-Entwurfs ist stets die zwei Bedingungen \textit{Hardness} und \textit{Usefulness} zusammen zu betrachten. Wichtig für Probleminstanzen ist, dass gefundene Lösungen effizient verifizierbar sind. Da die Wahl willkürlicher Probleminstanzen dazu führen kann, dass eine Hardness nicht gewährleistet werden kann. Würde man beispielsweise eine einfache Primzahl vom Miner verlangen so wäre eine mögliche einfache Antwort eines Provers die Zahl ``2''. Es ist offensichtlich, dass beim Finden einer Lösung für diese Challenge keine Arbeit investiert wurde. Gibt es Probleminstanzen, die zwar die Hardness-Bedingung erfüllen allerdings zufällig ausgewählt werden, sodass sie nicht reproduzierbar sind, führt das zum Bruch der Usefulness-Bedingung.  Darüber hinaus muss im Sinne der Usefulness ebenfalls gelten, dass falsche Berechnungen erkannt werden können. Zudem muss betrachtet werden ob ein entsprechendes generisches Framework in die Blockchain passt.
 
 \subsection{k-Orthogonal-Vectors-Problem}
-Wir greifen den Gedanken von nützlichen Berechnungen auf und wollen die nutzlose SHA256-Hash-Berechnung ersetzen gegen etwas, das weiter verwendet werden kann.
-Wie bereits im Abschnitt zum Proof of Work Protokoll erwähnt gibt es gewisse Probleme in der Informatik, die NP-schwer sind, das heißt Probleme, die entweder gar nicht lösbar sind oder dass es sich um eines der Schwierigsten Probleme der Klasse NP handelt. Die Komplexitätsklassen vieler Probleme dieser Seminararbeit behandelt eben solche Probleme.
+\label{kov}
+Der Gedanken von nützlichen Berechnungen wird wieder aufgegriffen und das Ziel wird sein die nutzlose SHA256-Hash-Berechnung gegen etwas, das wiederverwendet werden kann, auszutauschen.\\
+Wie bereits im Abschnitt zum Proof of Work Protokoll erwähnt gibt es gewisse Probleme in der Informatik, die NP-schwer sind, das heißt Probleme, die entweder gar nicht lösbar sind oder dass es sich um eines der schwierigsten Probleme der Klasse NP handelt \cite{t01_will15}. Die Komplexitätsklassen vieler Probleme dieser Arbeit behandeln eben solche Probleme.
 
+Nach \cite{t01_will15} ergibt sich für NP-schwere Entscheidungsprobleme:
 \begin{mydef}
-Ein Entscheidungsproblem E nennt sich NP-schwer wenn es für jedes Problem P aus NP eine polynomielle Reduktion von P nach E existiert.
-\end{mydef}
+  Ein Entscheidungsproblem E nennt sich NP-schwer wenn es für jedes Problem P aus NP eine polynomielle Reduktion von P nach E existiert.
+  \end{mydef}
 
-Ein beliebtes NP-schweres Problem aus der theoretischen Informatik ist das k-Orthogonal-Vecotrs-Problem.
-Besonders Graphenprobleme können sehr gut auf das OV-Problem reduziert werden.
-\begin{mydef}[k-Orthogonale Vektoren]
-  Gegeben sind $k$ Mengen $(U_1,...,U_k)$ für ein festes $k \geq 2$ mit $k \in \mathbb{N}$, von n Vektoren der Dimension d $\{0,1\}^{d(n)} $. Dann heißt eine solche Menge von Vektoren k-orthogonal, wenn $u^s \in U_s$ für $s \in [k]$, sodass sich $$\sum_{l \in [d(n)]}u_l^1,...,u_l^k = 0$$ ergibt.
+  Ein beliebtes NP-schweres Problem aus der theoretischen Informatik ist das k-Orthogonal-Vecotrs-Problem (k-OV-Problem) \cite{t01_will15}.
+  Nach \cite{t01_will15} und \cite{t01_brsv} können Probleme aus der Graphenteorie sehr gut auf das OV-Problem reduziert werden.
+  \begin{mydef}[k-Orthogonale Vektoren]
+    Gegeben sind $k$ Mengen $(U_1,...,U_k)$ für ein festes $k \geq 2$ mit $k \in \mathbb{N}$, von n Vektoren der Dimension d $\{0,1\}^{d(n)} $. Dann heißt eine solche Menge von Vektoren k-orthogonal, wenn $u^s \in U_s$ für $s \in [k]$, sodass sich $$\sum_{l \in [d(n)]}u_l^1,...,u_l^k = 0$$ ergibt.
 
-\end{mydef}
+  \end{mydef}
 
-Da das k-OV-Problem allerdings worst-case hart ist und es keine Aussagen zum Average-Case gibt, reduziert \cite{t01_brsv} das Problem auf ein verwandtes Problem, das sowohl im Worst-Case als auch im Average-Case hart ist. Dafür definiert \cite{t01_brsv} ein Polynom $gOV_{n,d,p}^k$ vom Grad $kd$: $\mathbb{F}_p^knd \longrightarrow \mathbb{F}_p$, wobei $p$ jede Primzahl sein kann. Alle weiteren Parameter sind zum k-OV-Problem äquivalent. Für eine Berechnung von gOV gilt dann:
-$$ gOV_{n,d,p}^k (U_1,...,U_k) = \sum_{i_1,...,i_k \in [n]} \prod_{l \in [d]}(1-u_{i_1l}^1 \cdot \cdot \cdot u_{i_kl}^k)$$
+  Da das k-OV-Problem allerdings im Worst-Case hart ist \cite{t01_brsv} und es keine Aussagen zum Average-Case gibt, reduziert \cite{t01_brsv} das Problem auf ein verwandtes Problem, das sowohl im Worst-Case als auch im Average-Case hart ist. Dafür definiert \cite{t01_brsv} ein Polynom $gOV_{n,d,p}^k$ vom Grad $kd$: $\mathbb{F}_p^knd \longrightarrow \mathbb{F}_p$, wobei $p$ jede Primzahl sein kann. Alle weiteren Parameter sind zum k-OV-Problem äquivalent. Für eine Berechnung von gOV gilt dann:
+  $$ gOV_{n,d,p}^k (U_1,...,U_k) = \sum_{i_1,...,i_k \in [n]} \prod_{l \in [d]}(1-u_{i_1l}^1 \cdot \cdot \cdot u_{i_kl}^k)$$
 
-\cite{t01_brsv} zeigt weiterhin, dass das entwickelte Proof of Useful Work für die Probleme 3SUM und ALl-Pairs Shortest Paths eingesetzt werden kann. Hierbei gilt allerdings auch wieder, dass jedes Problem, das auf das $k$-OV, 3SUM oder APSP Problem reduziertbar ist, eignet sich ebenso für das uPoW-Schema. \cite{t01_brsv} weist besonders auf alle Probleme aus der Graphentheorie hin, die auf das $k$-OV-Problem reduzierbar sind, weil diese sich sehr gut eignen würden. Daraus folgt, dass eine sehr große Menge an praktischen Problemen an das Netzwerk delegiert werden kann und fortan Berechnungen mit einem Nutzen durchgeführt werden können.
+  \cite{t01_brsv} zeigt, dass das entwickelte Proof of Useful Work für die Probleme 3SUM und All-Pairs Shortest Paths basierend auf den Erkenntnissen von \cite{t01_will15} eingesetzt werden kann. Hierbei gilt allerdings auch wieder, dass jedes Problem, das auf das $k$-OV, 3SUM oder APSP Problem reduzierbar ist, sich ebenso für das uPoW-Schema eignet. \cite{t01_brsv} weist besonders auf alle Probleme der Graphentheorie hin, die auf das $k$-OV-Problem reduzierbar sind. Daraus folgt, dass eine sehr große Menge an praktischen Problemen an das Netzwerk delegiert werden kann und fortan Berechnungen mit einem Nutzen durchgeführt werden können.
 
-\subsubsection{3SUM}
+\subsection{3SUM}
 \label{tmp_3sum}
-\textbf{Beschreibung}. Gegeben eine Menge S von n ganzen Zahlen. Gibt es drei Zahlen ${a, b, c} \in S$ deren Summe $a+b+c = 0$ ergibt?
+Gegeben ist eine Menge S von n ganzen Zahlen. Gibt es drei Zahlen ${a, b, c} \in S$ deren Summe $a+b+c = 0$ ergibt?
 Das 3SUM problem kann in $\mathcal{O}(n^2)$ gelöst werden. Als untere Schranke ist keine bessere Laufzeit als $\Omega(n\log{}n)$ bekannt.
 Frage: Gibt es einen Algorithmus, der das 3SUM Problem in $\mathcal{O}(n^{2-\varepsilon})$ für ein $\varepsilon > 0$ löst?
-Eine weitere Idee ist Probleme zu finden, die sich auf dieses Problem reduzieren lassen und eventuell häufig in der Praxis auftauchen. Ein Problem heißt genau dann 3SUM-schwer, das durch eine Lösung in $\mathcal{O}(n^2)$ eine Laufzeit in $\mathcal{O}(n^2)$ für das 3SUM Problem impliziert. \cite{t01_go95} Haben gezeigt, dass es eine große Klasse an 3SUM-Problemen gitb. Darunter sind nachfolgende einige Aufgelistet:
+Mit dieser Fragestellung im Hintergrund lassen sich Probleme finden, die sich auf dieses Problem reduzieren lassen und eventuell häufig in der Praxis auftreten. Diese Probleme werden auch 3SUM-schwer bezeichnet. Ein Problem heißt genau dann 3SUM-schwer, wenn es durch eine Lösung in $\mathcal{O}(n^{2-\varepsilon})$ eine Laufzeit in $\mathcal{O}(n^{2-\varepsilon})$ für das 3SUM Problem impliziert \cite{t01_go95}. \cite{t01_go95} hat gezeigt, dass es eine große Klasse an 3SUM-Problemen aus der Algorithmischen Geometrie gibt. Darunter sind nachfolgend drei Beispiele aufgelistet:
+
 \begin{itemize}
-  \item Given a set of lines in the plane, are there three that meet in a point?
-  \item Given a set of non-intersecting axis-parallel line segments, is there a line that separates them into two non-empty subsets?
-  \item Given a set of infinite strips in the plane, do they fully cover a given rectangle?
-  \item Given a set of triangles in the plane, compute their measure.
+  \item Gegeben eine Menge von Linien in der Ebene. Gesucht werden drei Linien, die sich in einem Punkt treffen.
+  \item Gegeben eine Menge von Liniensegment, die sich nicht kreuzen und achsenparallel sind. Gesucht wird eine Linie die diese in zwei nicht leere Mengen unterteilt.
+  \item Gegeben eine Menge von n Punkten. Gibt es eine Linie, die 3 Punkte enthält?
   \item Given a set of triangles in the plane, does their union have a hole?
-  \item A number of visibility and motion planning problems, e.g.,
-  \item Given a set of horizontal triangles in space, can a particular triangle be seen from a particular point?
-  \item Given a set of non-intersecting axis-parallel line segment obstacles in the plane, can a given rod be moved by translations and rotations between a start and finish positions without colliding with the obstacles?
 \end{itemize}
 
-\textbf{TODO}They proved that a large class of problems in computational geometry are 3SUM-hard, including the following ones. (The authors acknowledge that many of these problems are contributed by other researchers.)
-
-They proved that a large class of problems in computational geometry are 3SUM-hard, including the following ones. (The authors acknowledge that many of these problems are contributed by other researchers.)
-
-A problem is called 3SUM-hard if solving it in subquadratic time implies a subquadratic-time algorithm for 3SUM.
-Ein Problem P heißt 3SUM-hard genau dann, wenn gilt
-3SUM ≪f (n) P mit f(n) wächst langsamer als n
-2
-.
-
-Sei P 3SUM-hard:
-Algorithmen für P haben immer eine Laufzeit größer gleich
-O(n
-2
-).
-Findet man einen mit einer kleineren Laufzeit, folgt daraus
-die Existenz eines Äquivalenten für 3SUM
-
-Die untere Schranke Ω(n log n) von 3SUM überträgt sich
-auf P.
-
-Da 3SUM für sich alleine in der Praxis keine große Bedeutung
-hatte war ihre Idee es Probleme zu finden, die mindestens so
-schwer wie 3SUM sind.
-A problem is called 3SUM-hard if solving it in subquadratic time implies a subquadratic-time algorithm for 3SUM. The concept of 3SUM-hardness was introduced by Gajentaan & Overmars (1995).
-
-
-By now there are a multitude of other problems that fall into this category. An example is the decision version of X + Y sorting: given sets of numbers X and Y of n elements each, are there n² distinct x + y for x ∈ X, y ∈ Y?[9]
-- BESCHREIBUNG
-- NUTZEN
-- PRO CONTRA
-- EVALUIERUNG
 
 \subsection{Mögliche Kandidaten}
-Wie im vorhergehenden Abschnitt beschrieben kann jedes Problem, das auf das k-OV-Problem reduziert werden kann, an Prover deligiert werden, die einen Nachweis über Arbeit liefern müssen. Weiterhin zeigt \cite{t01_brsv}, dass diese Annahme ebenso für 3SUM und APSP gilt. Im folgenden werden Kandidaten vorgestellt, die für einene Einsatz im Proof of Useful Work Framework nach \cite{t01_brsv} betrachtet werden. Unter den Kandidaten befinden sich auch Projekte, die auf verteilten Rechnernetzen durchgeführt werden. lche die von nutzvollen Berechnungen weggehen und vorschlagen, dass beispielsweise mit der Abwärme von Servern, Wohnhäuser beheitzt werden sollten, um so einen Nutzen für die Gesellschaft zu ermöglichen. Oder dass von Kraftwerken die Abfallspannung zum Minen verwendet werden solle, da diese sowieso zur Verfügung steht und keine Verwendung sonst hat. In dieser Ausarbeitung liegt der Schwerpunkt allerdings auf die Berechnung von theoretischen sowie praktischen Problemen, die bestimmte Aufgaben mithilfe von Algorithmen lösen sollen. Neben dem bereits vorgestellten OV-Problem sieht
-\cite{t01_brsv} als Möglichkeit 3SUM~\ref{tmp_3sum}, APSP und generelle alle Graphenprobleme, die auf das Orthogonale Vektor Problem reduziert werden können.
-
-Mögliche Kandidaten sind:
+Es liegt in der Natur der Sache die Hashberechnung von Bitcoin durch eine nützliche Berechnung zu ersetzen. Dadurch werden immer wieder verschiedene Vorschläge getätigt\footnote{\url{http://learningspot.altervista.org/blockchain-mining-proof-of-useful-work}}, die Berechnungen sollten aus großen Projekten aus verschiedenen Bereichen der Astrophysik oder Biologie wie SETI@Home resp. Folding@Home stammen, um die Menschheit bei der Suche nach außerirdischer Intelligenz voranzutreiben oder DNA-bedingte Krankheiten zu heilen.
+Wie im vorhergehenden Abschnitt beschrieben kann jedes Problem, das auf das k-OV-Problem reduziert werden kann, an Prover delegiert werden, die einen Nachweis über Arbeit liefern müssen. Weiterhin zeigt \cite{t01_brsv}, dass diese Annahme ebenso für 3SUM und APSP gilt. Im Folgenden werden Kandidaten vorgestellt, die für einen möglichen Einsatz im Proof of Useful Work Framework nach \cite{t01_brsv} evaluiert werden.
+Bei der Suche nach möglichen Kandidaten fällt der erste Gedanke auf Projekte aus Bereich des Distributed Computing\footnote{\url{https://en.wikipedia.org/wiki/List_of_distributed_computing_projects}}. Aus der Liste der Distributed Computings wurden zwei der berühmtesten und größten Projekte dem SETI@Home und Folding@Home die Eignung des Proof of Useful Work Schemas untersucht.
+Daraus ergeben sich folgende Kandidaten für ein Useful Proof of Work:
 \begin{itemize}
-  \item OV
-  \item 3SUM
-  \item APSP \cite{t01_will15}
-  \item Proteinfolding
-  \item Aliensuche
-  \item Birthdayproblem
+  \item[] \textbf{Orthogonal Vectors Problem.} Wie bereits in Abschnitt ~\ref{kov} eignet sich das Orthogonal Vectors Problem sehr gut und wurde bereits von \cite{t01_brsv} bewiesen.
+  \item[] \textbf{3SUM.} Eignet sich nach \cite{t01_brsv} und \cite{t01_will15} ebenfalls für ein uPoW.
+  \item[] \textbf{All-Pairs Shortest Path.} Gegeben ist ein gerichteter oder ungerichteter Graph mit Kantengewichten. Gesucht werden alle Distanzen zwischen jedem Knotenpaar aus dem Graphen. Ein Algorithmus der dieses Problem löst ist der Floyd-Warshall Algorithmus $\mathcal{O}(n^3)$. \cite{t01_brsv} beschreibt, dass ein uPoW für APSP möglich ist.
+  \item[] \textbf{Folding@Home.} Volenteer-Computing-Projekt der Stanford University aus dem Bereich der Biologie und Medizin. Das Projekt hat den Hintergrund, dass viele Krankheiten wie Krebs oder Alzheimer durch Fehler in der Faltung von Proteinen entsehen können. Das Ziel des Projekts ist es mittels eines Netzwerks von verteiltetn Computersystemen den räumlichen Aufbau von Proteinen verstehen zu können, um somit die Entstehung von Krankheiten identifizieren und gegebenenfalls sogar heilen zu können.
+  Eine Berechnung auf den Universitätsinternen Rechensystemen würde mehrere Jahrhunderte dauern \footnote{\url{https://de.wikipedia.org/wiki/Folding@home}}. Aus diesem Grund wird das Projekt auf mehrere Rechner eines Netzwerks verteilt und gehört damit zu den Projekten des Distributed Computing.
+  \item[] \textbf{SETI@Home.} SETI (engl.: \textit{Search for Extra-Terrestrial Intelligence})\footnote{\url{https://de.wikipedia.org/wiki/SETI@home}} ist ähnlich wie das vorherige Projekt ein Projekt des Distributed Computing. Inhalt des Projekts ist die Suche nach außerirdischer Intelligenz im Weltall. Ein Radioteleskop zeichnet Radiosignale aus der Himmelsrichtung auf, die dann im Anschluss ausgewertet werden.
 \end{itemize}
 
-Es liegt in der Natur der Sache die Hashberechnung von Bitcoin durch eine nützliche Berechnung zu ersetzen. Dadurch werden immer wieder verschiedene Vorschläge getätigt, die Berechnungen sollten große Projekte große Projekte aus verschiedenen Bereichen der Astrophysik oder Biologie wie SETI@Home resp. Folding@Home, um die Menschheit bei der Suche nach außerirdischer Intelligenz voranzutreiben oder DNA-bedingte Krankheiten zu heilen. Diese Lösungen sind sehr gute Vorschläge jedoch sind sie nicht so einfach integrierbar wie sich viele vorstellen. Der wesentliche Unterschied zwischen Bitcoins SHA256-Hashberechnungen und den Distributed Computing Projects wie SETI@home und Folding@home ist, dass letztere nicht effizient verifizierbar sind. Eine Einwegfunktion dagegen kann man schnell schnell und effizient verifizieren??? Momentan handelt es sich bei den meisten Projekten der Distributed Computing Projects um freiwillige Projekte. Das heißt hinter jedem Projekt und jeder Berechnung stehen Teilnehmer, die darauf bedacht sind das Ziel für das jeweilige Projekt mit richtigen Werten zu berechnen. Werden diese Projekte alelrdings zum Bitcoin Mining verwendet geht das Ziel des Projektes verloren, da ein Teilnehmer im Bitcoin-Netzwerk eventuell kein Bedürfnis in der Probleminstanz für sich sieht und einfach Fake-Daten berechnet, um seinen Gewinn zu maximieren. Eine Unterscheidung zwischen gefakten und echten Werten ist damit nicht möglich. Das wiederum hätte keinen Mehrwert für das jeweilige Projekt, sodass hier ein Bruch der Usefulness von uPoW stattfindet.
+Bei den Kandidaten handelt es sich zwar um interessante Vorschläge, jedoch sind sie nicht so einfach integrierbar. Der wesentliche Unterschied zwischen Bitcoins SHA256-Hashberechnungen und den Distributed Computing Projects wie SETI@home und Folding@home ist, dass letztere beiden nicht effizient verifizierbar sind. Momentan handelt es sich bei den meisten Projekten der Distributed Computing Projects um freiwillige Projekte. Das heißt hinter jedem Projekt und jeder Berechnung stehen Teilnehmer, die darauf bedacht das jeweilige Projekt mit richtigen Lösungen zu befüllen. Werden diese Projekte allerdings zum Bitcoin Mining verwendet geht das Ziel des Projektes verloren, da ein Teilnehmer im Bitcoin-Netzwerk eventuell kein Bedürfnis für sich sieht ein Projekt voranzutreiben und einfach Fake-Daten für eine Gewinnmaximierung berechnet. Eine Unterscheidung zwischen falschen und echten Werten ist nicht möglich. Das wiederum hätte keinen Mehrwert für das jeweilige Projekt, was wiederum einen Bruch der Usefulness von uPoW zur Folge hat.
 
-
-Die
-EHER VON PROVER UND VERIFIER SPRECHEN!!!! CHALLENGER MANCHMAL AUCH!!!!!!!!!!!!!!!!!!!!!!
-
-\begin{figure}[htb]
-	\centerline{\includegraphics*[width=0.8\textwidth]{assets/np-hardness}}
-\caption{Dies ist die Bildunterschrift}
-\label{tmp_Bild1}
-\end{figure}
 
 \subsection{Blockchain-Schema}
-Die Kernstruktur Bictoin's Blockchain übernehmen wir. DIe Blockchain ist weiterhin eine Chronik von Transaktionsblöcken, die miteinander verkettet sind. Die Verkettung ergibt sich wieterhin aus dem Link zum Hash des vorherigen Transaktionsblocks.
-Berechnungen, die sowieso auf riesigen SUpercomputern stattfinden würden, könnten auf REchner eines verteilten Netzwerks ausgelagert werden. Somit würde man die Kosten für Stromverbrauch reduzieren auf der Welt.
-Das Problem ist wenn irgendwann nicht genügend Challenges vorhanden sind, müssen Primzahlen beispielsweise weiter berechnet werden.
-
-In fig1 wird ein öffentliches Board dargestellt, das für Delegierende dazu dient ihre Probleme zur Berechnung zur Verfügung zu stellen. Sobald ein Miner ein PoW durchführen muss, nimmt dieser sich ein Problem vom Problem Board und löst dieses, um den nächsten Block an die Blockchain anzuhängen. Dabei kann jede Art von Priority Scheduling zum Wählen der nächsten Challenge verwendet werden.
-
+\cite{t01_brsv} stellt ein Blockchain-Schema vor, das den Anforderungen eines Proof of Useful Work gerecht werden soll. Jedes Blockchain-basierte System soll das uPoW nutzen können, um einen Proof of Work einerseits zu ermöglichen und andererseits als Quelle von Berechnungen für Delegierende gelten \cite{t01_brsv}.\\
+Bitcoin setzt PoW in einem riesigen Umfang ein. Dahinter steht eine große Community, die mit Problemen versorgt werden kann, um diese zu lösen. Ball et al. merken allerdings an, dass ein generisches uPoW nicht einfach in ein Blockchain-Schema, wie Bitcoin es verwendet, hineinpassen würde. Ungültige oder modifizierte Transaktionen müssen dazu führen, dass das PoW oder uPoW ungültig wird. Die Blockchain ist weiterhin eine Chronik von Transaktionsblöcken, die miteinander verkettet sind. Wie bei PoW muss auch für das uPoW gelten, dass Änderungen an Blöcken immer erkannt werden sollen. Eine Verkettung ergibt sich weiterhin aus dem Link zum Hash des vorherigen Transaktionsblocks, wie in Abbildung ~\ref{tmp_newbc} dargestellt. Über ein Public Board können Delegierende ihre Probleme an Prover delegieren, die ein Proof of Work durchführen müssen. In Abbildung ~\ref{tmp_newbc} wird ein solches Public Board dargestellt, das für Delegierende dazu dient ihre Probleme $(f,x)$ zur Berechnung zur Verfügung zu stellen. Beim Mining-Verfahren nimmt sich ein Miner für die Durchführung eines PoW ein Problem vom \textit{Problem Board} und löst es. Sobald die Verifizierung erfolgreich war kann der generierte Block an die Blockchain angehängt werden. Dabei kann jede Art von Priority Scheduling oder Zufallsverfahren zum Wählen der nächsten Challenge verwendet werden.
+Wie auch in ~\ref{tmp_pow} beschrieben kann der Worker nun mit der Instanz $x$ sich die Challenge $c_x = {x + rt | t \in [D+1]}$ mit \code{Gen(x)} generieren wobei $r=H(currentBlock)$ für ein zufällig gleichverteiltes Orakel H.
 \begin{figure}[htb]
 	\centerline{\includegraphics*[width=0.8\textwidth]{blockchain_scheme}}
-\caption{Dies ist die Bildunterschrift}
-\label{tmp_Bild1}
+\caption{Blockchain-Schema für ein uPoW nach \cite{t01_brsv}. Ein Problem hat die Form (f,x), wobei f ein Label des Problems ist. $x$ ist die Instanz, für die es $f(x)$ zu lösen gilt. Ein Block besteht aus: dem Problem $(f,x)$; dem Hash des Vorgängers, prevHash; einer Transaktion; der Challenge $c_x = {x + rt | t \in [D+1]}$.}
+\label{tmp_newbc}
 \end{figure}
 
-Der Worker ist jetzt im Besitz der Probleminstanz x. Nun kann er mit HIlfe eines Zufallsorakel H die CHallenge $c_x$ generieren ohne der Substitution von $r= H(current Block)$ $$ c_x = {x + rt | t \in [D + 1]}$$ Für ein echtes Zufallsorakel H, r wird zufällig sein und das wird somit ein Standardchallenge für uPoW werden.
+Die Gültigkeit eines Blocks kann verifiziert werden, indem die Hash des vorhergehenden gültigen Blocks auf Richtigkeit überprüft wird. Außerdem sollte ebenfalls überprüft werden, ob die Challenge $(f,x)$ nicht bereits vorher bereits gelöst wurde. Falls zwei Miner gleichzeitig versuchen einen Block hinzuzufügen und einer schneller ist als der andere, geht die Challenge $(f,x)$ nicht verloren, sondern der Miner versucht diese zu lösen, bis er das Wettrennen für sich entscheiden kann. Durch die Usefulness-Eigenschaft kann ein Delegierender schnell aus dem uPoW ein $f(x)$ rekonstruieren.
 
-Somit ist das vorgestellte Blockchain Schema und das PoW sensitive to changes in the Block that the proof is made for.
-
-
-\section{Diskussion}
-Das vorgestellte Framework eines Proof of Useful Work nach \cite{t01_brsv}
-Wer darf Probleme delegieren?
-Ist Fairness bei der Vergabe von Challenges garantiert?
-Wie sieht ein Update von Bitcoin aus durch die Integration neuer Mechanismen?
-Was ist wenn es keine Probleme auf dem Public Board gibt?
 \section{Zusammenfassung und Ausblick}
-Beschrieben wurde ein Allgemeiner Ansatz/Framework zu einem Proof of Useful Work basierend auf der Arbeit von \cite{t01_brsv}. Momentan existiert noch keine Praktische Umsetzung dieses Frameworks, sodass der praktische EInsatz noch geprüft werden muss. Besonders für die Forschung aus der Theoretischen Informatik ist dieser Ansatz sehr interessant, da viele NP-harte Probleme anstelle von  Supercomputern sinnvoll über ein Public Board der Blockchain an Worker delegiert werden können. Mögliche Kandidaten für das Schema sind alle Probleme, die auf eines der Probleme 3SUM, All-Pairs Shortes Paths oder Orthogonal Vectors Problem reduzierbar sind. Dabei ist darauf zu achten, dass ein Problem die fünf Eigenschaften \textit{Hardness}, \textit{Usefulness}, \textit{Efficiency}, \textit{Completeness} und \textit{Soundness}. Würde das theoretische Konzept in der Praxis so umgesetzt werden könnte es auf jeden Fall zu einer Senkung des globalen Stromverbrauchs führen und ein Proof of Work ablösen, das Berechnungen durchführt, die keinen weiteren Nutzen als der Beweis der geleistet Arbeit hat. \\
-Es sind allerdings noch viele Fragen offen, die es in der weiteren recherche gilt zu überprüfen. So ist nicht eindeutig beschrieben was passieren soll, wenn auf dem Public Board nicht genügend Probleme liegen, die Worker bearbeiten könnten. Würde das System stagnieren oder können Primzahlenberechnungen abhilfe verschaffen? Auch wer delegieren darf ist nicht geklärt.
+Beschrieben wurde ein allgemeines Framework zu einem Proof of Useful Work (uPoW) basierend auf der Arbeit von \cite{t01_brsv}. Wie beschrieben kann dieses uPoW für Bitcoin eingesetzt werden. Die Miner können weiterhin zur Paralleliseriung der Arbeit ``Mining Pools'' erstellen wobei das Framework robust gegenüber Fehlern ist \cite{t01_brsv}. Proof of Work wird durch die Hardness Bedingung aus Abschnitt ~\ref{tmp_upow} gewährleistet. Usefulness gewährleistet, indem die Möglichkeit geboten wird praktische Probleme, die auf das Orthogonal Vectors Problem, 3SUM oder APSP reduziert werden können, über das Board an Miner zu delegieren und die Lösungen zu rekonstruieren.\\
+Berechnungen, die sowieso auf riesigen Supercomputern stattfinden würden, könnten auf Rechnern eines verteilten Netzwerks ausgelagert werden. Somit würde man die Kosten für Stromverbrauch auf der gesamten Welt reduzieren können.\\
+Besonders für die Forschung aus der Theoretischen Informatik ist der Ansatz des uPoW nach \cite{t01_brsv} sehr interessant, da viele NP-harte Probleme anstelle von  Supercomputern sinnvoll über ein Public Board der Blockchain an Worker delegiert werden können. Mögliche Kandidaten für das Schema sind alle Probleme, die auf eines der Probleme 3SUM, All-Pairs Shortes Paths oder Orthogonal Vectors Problem reduzierbar sind. Dabei ist darauf zu achten, dass ein Problem die fünf Eigenschaften \textit{Hardness}, \textit{Usefulness}, \textit{Efficiency}, \textit{Completeness} und \textit{Soundness} erfüllt. Würde das theoretische Konzept in der Praxis so umgesetzt werden könnte es höchstwahrscheinlich zu einer Senkung des globalen Stromverbrauchs führen und ein Proof of Work ablösen, das Berechnungen durchführt, die keinen weiteren Nutzen als der Beweis der geleistet Arbeit hat. \\
+Eine Implementierung des vorgestellten uPoW gibt es nicht. Somit kann bisher auch keine Aussage über einen praktischen Einsatz getroffen werden. Für weiterführende Arbeiten müsste die Umsetzbarkeit überprüft werden. Weiter ist noch ungeklärt, wer Challenges über das Public Board delegieren darf. Denn dann müssten eventuell auch die delegierten Probleme zunächst auf Hardness überprüft werden. In diesem Zusammenhang müsste auch eine Fairness garantiert werden, denn sonst könnten Probleme einiger Delegierender bevorzugt werden. \\
+Eine weitere Ungeklärtheit ist, was passieren soll, wenn keine Probleme auf das Public Board delegiert werden. Stagniert das System oder können stattdessen Primzahlen-Berechnungen wie bei Primecoin durchgeführt werden?\\
+Für zukünftige Arbeiten wären dies weitere Einstiegspunkte, die es zu erforschen gilt, um ein solides uPoW-Konzept zu enwtickeln.
+
 
 % \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/ \/
 % Sollte noch zus�tzliche Literatur verwendet worden sein, dann bitte die
